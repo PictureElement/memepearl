@@ -60,17 +60,10 @@ main .container {
 footer a {
   color: #333;
 }
+
 footer a:hover {
   text-decoration: none;
   color: #333;
-}
-footer span {
-  color: #ad5389;
-  font-weight: bold;
-}
-
-.display {
-  font-size: 1.5rem;
 }
 
 /* Small devices (landscape phones, 576px and up) */
