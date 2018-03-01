@@ -69,7 +69,7 @@ header .container {
   margin: 1rem 0;
 }
 
-header:after {
+main:before {
   content: "";
   position: absolute;
   left: 0;
