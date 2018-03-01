@@ -21,8 +21,8 @@
         <img width="150" class="logo" draggable="false" src="images/logo.svg">
         <h1 class="header-logo display-3 text-gradient">MemeGen</h1>
         <p class="lead text-white">
-          Upload your image to generate funny memes now with MemeGen, a simple 
-          and easy to use meme generator. Don't have an internet connection? 
+          MemGen is a simple and easy to use meme generator. Upload your image 
+          to generate funny memes instantly. Don't have an internet connection? 
           Don't worry we got you covered. The app works even when offline!
         </p>
         <div>
@@ -36,30 +36,35 @@
       </div>
     </header>
     <main>
-      <div class="container border bg-white">
-        <h2>Create your awesome meme</h2>
-        <hr>
-        <p class="lead text-dark ">
-          Upload your image to generate funny memes now with MemGen, a simple and 
-          easy to use meme generator. Don't have an internet connection? Don't 
-          worry we got you covered. The app works even when offline!
-        </p>
-        <p class="lead text-dark ">
-          Upload your image to generate funny memes now with MemGen, a simple and 
-          easy to use meme generator. Don't have an internet connection? Don't 
-          worry we got you covered. The app works even when offline!
-        </p>
-        <p class="lead text-dark ">
-          Upload your image to generate funny memes now with MemGen, a simple and 
-          easy to use meme generator. Don't have an internet connection? Don't 
-          worry we got you covered. The app works even when offline!
-        </p>
-        <p class="lead text-dark ">
-          Upload your image to generate funny memes now with MemGen, a simple and 
-          easy to use meme generator. Don't have an internet connection? Don't 
-          worry we got you covered. The app works even when offline!
-        </p>
+      <div class="container border rounded bg-white">
+        <div class="row">
+          <div class="col-sm-8">
+            <canvas id="c" class="border-secondary rounded">
+              Image on canvas
+            </canvas>
+          </div>
+          <div class="col-sm-4">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputFile">
+                <label class="custom-file-label" for="inputFile">Choose file</label>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Top Line" aria-label="Top Line">
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Bottom Line" aria-label="Bottom Line">
+            </div>
+            <a class="btn btn-secondary" href="#" role="button">Save</a>
+          </div>
+        </div>
       </div>
     </main>
+    <footer class="text-center p-4">
+      <a href="#">
+        <span class="display">&lt;&gt;</span> with <span class="display">&hearts;</span> by PictureElement
+      </a>
+    </footer>
   </body>
 </html>
