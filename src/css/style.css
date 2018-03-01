@@ -4,11 +4,6 @@ html {
   font-size: 1rem;
 }
 
-*, *::before, *::after {
-  -webkit-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #9ed1dd;
