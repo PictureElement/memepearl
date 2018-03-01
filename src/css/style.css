@@ -1,0 +1,36 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+.bg-gradient {
+  background: linear-gradient(#ad5389, #3c1053);
+}
+.text-gradient {
+  background: -webkit-linear-gradient(#ecf8f8, #78d1cd);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+header .container  {
+  display: flex;
+  flex-direction: column;
+  max-width: 42em;
+  text-align: center;
+  height: 100vh !important;
+  /* Horizontal and vertical centering */
+  justify-content: center;
+  align-items: center;
+}
+.header-logo {
+  font-variant: small-caps;
+  margin: 1rem 0;
+}
