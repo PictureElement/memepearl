@@ -17,51 +17,48 @@
   </head>
   <body>
     <!--<button class="back-to-top-button" aria-label="back to top">↑</button>-->
-    <header class="bg-gradient">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
-            <h1 class="header-logo display-4 text-gradient">MemeGen</h1>
-            <p class="lead text-white">
-              MemGen is a simple and easy to use meme generator. Upload your image
-              to generate funny memes instantly. Don't have an internet connection?
-              Don't worry we got you covered. The app works even when offline!
-            </p>
-            <div>
-              <a class="github-button" href="https://github.com/PictureElement" data-size="large" aria-label="Follow @PictureElement on GitHub">
-                Follow @PictureElement
-              </a>
-              <a class="github-button" href="https://github.com/PictureElement/memegen" data-icon="octicon-star" data-size="large" aria-label="Star PictureElement/memegen on GitHub">
-                Star
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <div class="inset-box-shadow cover-container d-flex h-100 p-3 mx-auto flex-column bg-gradient text-center">
+      <header>
+        <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
+        <h1 class="header-logo display-4 text-gradient">MemeGen</h1>
+        <p class="lead text-white">
+          MemGen is a simple and easy to use meme generator. Upload your image
+          to generate funny memes instantly. Don't have an internet connection?
+          Don't worry we got you covered. The app works even when offline!
+        </p>
+        <p class="lead">
+          <a class="github-button" href="https://github.com/PictureElement" data-size="large" aria-label="Follow @PictureElement on GitHub">
+            Follow @PictureElement
+          </a>
+          <a class="github-button" href="https://github.com/PictureElement/memegen" data-icon="octicon-star" data-size="large" aria-label="Star PictureElement/memegen on GitHub">
+            Star
+          </a>
+        </p>
+      </header>
+    </div>
+
     <main>
-      <div class="container border rounded bg-white">
+      <div class="container rounded bg-gray box-shadow">
         <div class="row">
-          <div class="col-sm-8">
-            <canvas id="c" class="border-secondary rounded">
+          <div class="canvas-wrapper col-sm-8">
+            <canvas id="c" class="h-100 border-secondary rounded">
               Image on canvas
             </canvas>
           </div>
           <div class="col-sm-4">
-            <div class="input-group mb-3">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputFile">
-                <label class="custom-file-label" for="inputFile">Choose file</label>
+            <form>
+              <div class="form-group">
+                <label for="formControlFile1">Upload your image</label>
+                <input type="file" class="form-control-file" id="formControlFile1">
               </div>
-            </div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Top Line" aria-label="Top Line">
-            </div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="Bottom Line" aria-label="Bottom Line">
-            </div>
-            <a class="btn btn-secondary" href="#" role="button">Save</a>
+              <div class="form-group">
+                <input type="text" class="form-control form-control-sm" id="formGroupInput1" placeholder="Top Line">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control form-control-sm" id="formGroupInput2" placeholder="Bottom Line">
+              </div>
+              <a class="btn btn-sm btn-success" href="#" role="button">Save</a>
+            </form>
           </div>
         </div>
       </div>

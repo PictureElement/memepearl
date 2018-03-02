@@ -1,12 +1,88 @@
+/*
+ * Base structure
+ */
+
 html {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 1rem;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #9ed1dd;
+}
+
+html, body {
+  height: 100%;
+  background-color: #9ed1dd;
+}
+
+.cover-container {
+  /* Horizontal and vertical centering */
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+ * Helper classes
+ */
+
+.inset-box-shadow {
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.bg-gradient {
+  background-image: linear-gradient(rgba(173, 83, 137, .5), rgba(60, 16, 83, .5)), url("../images/pattern.png");
+}
+
+.bg-gray {
+  background-color: #e3e3e3;
+}
+
+.text-gradient {
+  background: linear-gradient(#ecf6f8, #9ed1dd);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+/*
+ * Header
+ */
+
+header {
+  max-width: 42em;
+  padding: 0 1.5rem;
+}
+
+.header-logo {
+  font-variant: small-caps;
+}
+
+header:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  background-image: url(../images/triangle.svg);
+  background-size: 25px 25px;
+  width: 100%;
+  height: 25px;
+  bottom: -5px;
+}
+
+/*
+ * Main
+ */
+
+main {
+  margin-top: 2rem;
+}
+
+main .container {
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+  padding: 1.5rem;
+}
+
+.canvas-wrapper {
+  margin-bottom: .5rem;
 }
 
 canvas {
@@ -14,78 +90,12 @@ canvas {
   border: 1px solid;
 }
 
-.box-shadow {
-  -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
-}
-
-.bg-gradient {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(173, 83, 137, .5)), to(rgba(60, 16, 83, .5))), url("../images/pattern.png");
-  background-image: -webkit-linear-gradient(rgba(173, 83, 137, .5), rgba(60, 16, 83, .5)), url("../images/pattern.png");
-  background-image: -o-linear-gradient(rgba(173, 83, 137, .5), rgba(60, 16, 83, .5)), url("../images/pattern.png");
-  background-image: linear-gradient(rgba(173, 83, 137, .5), rgba(60, 16, 83, .5)), url("../images/pattern.png");
-}
-
-.text-gradient {
-  background: -webkit-gradient(linear, left top, left bottom, from(#ecf6f8), to(#9ed1dd));
-  background: -o-linear-gradient(#ecf6f8, #9ed1dd);
-  background: -webkit-linear-gradient(#ecf6f8, #9ed1dd);
-  background: linear-gradient(#ecf6f8, #9ed1dd);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-}
-
-header .container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  max-width: 42em;
-  text-align: center;
-  height: 100vh;
-  /* Horizontal and vertical centering */
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-
-.header-logo {
-  font-variant: small-caps;
-  margin: 1rem 0;
-}
-
-main:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  background-image: url(../images/triangle.svg);
-  -webkit-background-size: 25px 25px;
-  background-size: 25px 25px;
-  width: 100%;
-  height: 25px;
-  bottom: -5px;
-}
-
-main .container {
-  background: #fff;
-  -webkit-box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, .05);
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, .05);
-  margin-top: 2rem;
-  padding: 5%;
-}
+/*
+ * Footer
+ */
 
 footer a {
-  color: #333;
+  color: rgba(51,51,51,.5);
 }
 
 footer a:hover {
@@ -93,18 +103,22 @@ footer a:hover {
   text-decoration: none;
 }
 
-/* Small devices (landscape phones, 576px and up) */
+/*
+ * Media queries
+ */
 
-@media (min-width: 576px) {}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .canvas-wrapper {
+    margin-bottom: 0;
+  }
+}
 
 /* Medium devices (tablets, 768px and up) */
-
 @media (min-width: 768px) {}
 
 /* Large devices (desktops, 992px and up) */
-
 @media (min-width: 992px) {}
 
 /* Extra large devices (large desktops, 1200px and up) */
-
 @media (min-width: 1200px) {}
