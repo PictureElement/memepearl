@@ -82,11 +82,15 @@ main .container {
 }
 
 .canvas-wrapper {
+  width: 100%;
   margin-bottom: .5rem;
+  overflow-x: auto;
+  text-align: center;
 }
 
 canvas {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
   border: 1px solid;
 }
 

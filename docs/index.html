@@ -19,9 +19,9 @@
     <!--<button class="back-to-top-button" aria-label="back to top">↑</button>-->
     <div class="inset-box-shadow cover-container d-flex h-100 p-3 mx-auto flex-column bg-gradient text-center">
       <header>
-        <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
-        <h1 class="header-logo display-4 text-gradient">MemeGen</h1>
-        <p class="lead text-white">
+        <img width="75" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
+        <h1 class="header-logo text-gradient">MemeGen</h1>
+        <p class="text-white">
           MemGen is a simple and easy to use meme generator. Upload your image
           to generate funny memes instantly. Don't have an internet connection?
           Don't worry we got you covered. The app works even when offline!
@@ -41,32 +41,132 @@
       <div class="container rounded bg-gray box-shadow">
         <div class="row">
           <div class="canvas-wrapper col-sm-8">
-            <canvas id="c" class="h-100 border-secondary rounded">
-              Image on canvas
+            <canvas id="c" border-secondary rounded">
+              Sorry, the &lt;canvas&gt; element is not supported by your browser
             </canvas>
           </div>
           <div class="col-sm-4">
             <form>
               <div class="form-group">
                 <label for="formControlFile1">Upload your image</label>
-                <input type="file" class="form-control-file" id="formControlFile1">
+                <input type="file" class="form-control-file" id="file">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="formGroupInput1" placeholder="Top Line">
+                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="formGroupInput2" placeholder="Bottom Line">
+                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line">
               </div>
-              <a class="btn btn-sm btn-success" href="#" role="button">Save</a>
+              <a id="save" class="btn btn-primary" href="#" role="button">Save</a>
             </form>
           </div>
         </div>
       </div>
     </main>
     <footer class="text-center p-4">
-      <a href="#">
+      <a href="https://pictureelement.github.io/portfolio-2/">
         <i class="fa fa-code" style="font-size:20px;color:#ad5389;" aria-hidden="true"></i> with <i class="fa fa-heart" style="font-size:16px;color:#ad5389;" aria-hidden="true"></i> by PictureElement
       </a>
     </footer>
+    <script>
+      var canvas = document.getElementById('c');
+
+      // Check for canvas support
+      if (canvas.getContext) {
+
+        // Access the rendering context
+        var context = canvas.getContext('2d');
+      
+        function redrawMeme (image, topText, bottomText) {
+          // Erase any previously drawn content
+          context.clearRect(0, 0, canvas.width, canvas.height);
+
+          // Draw image
+          if (image != null) {
+            // Use the intrinsic size of image in CSS pixels
+            canvas.width = image.naturalWidth;
+            canvas.height = image.naturalHeight;
+            context.drawImage(image, 0, 0);
+          }
+
+          // Text styling
+          var fontSize = 20;
+          context.font = fontSize + "px Arial";
+          context.textAlign = 'center';
+          context.strokeStyle = 'black';
+          context.lineWidth = 4;
+          context.fillStyle = 'white';
+          
+          // Draw top line
+          if (topText != null) {
+            context.strokeText(topText, canvas.width / 2, fontSize);
+            context.fillText(topText, canvas.width / 2, fontSize);
+          }
+
+          // Draw bottom line
+          if (bottomText != null) {
+            context.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+            context.fillText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+          }
+        }
+
+        // Initialization
+        var currentImage = new Image();
+        currentImage.src = "http://www.placepuppy.net/600/375";
+        window.topLine = "TOP LINE";
+        window.bottomLine = "BOTTOM LINE";
+        console.log(currentImage);
+        redrawMeme(currentImage, window.topLine, window.bottomLine);
+
+        function textChangeHandler (e) {
+          var id = e.target.id;
+          var text = e.target.value;
+          if (id == "topLine") {
+            window.topLine = text;
+          }
+          else {
+            window.bottomLine = text;
+          }
+          redrawMeme(currentImage, window.topLine, window.bottomLine);
+        }
+
+        function fileSelectHandler () {
+
+          // File list
+          var fileList = this.files;
+
+          // Create a new instance of FileReader
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            var dataURL = reader.result;
+            // Set the src property for the current image using the data URL
+            currentImage.src = reader.result;
+            currentImage.onload = function () {
+              console.log('Image has been loaded');
+              // Draw image onto canvas
+              redrawMeme(currentImage, window.topLine, window.bottomLine);
+            }
+          }
+
+          // Produce a data URL for the file 
+          reader.readAsDataURL(fileList[0]); 
+        }
+        
+        // Execute textChangeHandler() when a user writes something in the <input> fields
+        document.getElementById("topLine").addEventListener("input", textChangeHandler);
+        document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
+
+        // Execute fileSelectHandler() when the user uploads an image
+        document.getElementById("file").addEventListener('change', fileSelectHandler, false);
+
+        document.getElementById("save").addEventListener('click', function () {
+          // Returns a data URI containing a representation of the image in the 
+          // format specified by the type parameter (defaults to PNG)
+          this.href = canvas.toDataURL();
+          this.download = "mymeme.png";
+        }, false);
+      }
+    </script>
   </body>
 </html>
