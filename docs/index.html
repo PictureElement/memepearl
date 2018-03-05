@@ -48,7 +48,7 @@
           <div class="col-sm-4">
             <form>
               <div class="form-group">
-                <label for="formControlFile1">Upload your image</label>
+                <label for="formControlFile1">Upload image (JPEG only)</label>
                 <input type="file" class="form-control-file" id="file">
               </div>
               <div class="form-group">
@@ -57,7 +57,10 @@
               <div class="form-group">
                 <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line">
               </div>
-              <a id="save" class="btn btn-primary" href="#" role="button">Save</a>
+              <div class="form-group">
+                <input type="number" min="1" max="200" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
+              </div>
+              <a id="save" class="btn btn-primary" role="button">Save</a>
             </form>
           </div>
         </div>
@@ -90,7 +93,6 @@
           }
 
           // Text styling
-          var fontSize = 20;
           context.font = fontSize + "px Arial";
           context.textAlign = 'center';
           context.strokeStyle = 'black';
@@ -112,9 +114,10 @@
 
         // Initialization
         var currentImage = new Image();
-        currentImage.src = "http://www.placepuppy.net/600/375";
+        currentImage.src = "images/placeholder.jpg";
         window.topLine = "TOP LINE";
         window.bottomLine = "BOTTOM LINE";
+        var fontSize = 50;
         console.log(currentImage);
         redrawMeme(currentImage, window.topLine, window.bottomLine);
 
@@ -127,6 +130,7 @@
           else {
             window.bottomLine = text;
           }
+          // Redraw canvas
           redrawMeme(currentImage, window.topLine, window.bottomLine);
         }
 
@@ -144,7 +148,7 @@
             currentImage.src = reader.result;
             currentImage.onload = function () {
               console.log('Image has been loaded');
-              // Draw image onto canvas
+              // Redraw canvas
               redrawMeme(currentImage, window.topLine, window.bottomLine);
             }
           }
@@ -157,14 +161,20 @@
         document.getElementById("topLine").addEventListener("input", textChangeHandler);
         document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
 
+        document.getElementById("fontSize").addEventListener("input", function (e) {
+          fontSize = e.target.value;
+          // Redraw canvas
+          redrawMeme(currentImage, window.topLine, window.bottomLine);
+        });
+
         // Execute fileSelectHandler() when the user uploads an image
         document.getElementById("file").addEventListener('change', fileSelectHandler, false);
 
         document.getElementById("save").addEventListener('click', function () {
           // Returns a data URI containing a representation of the image in the 
           // format specified by the type parameter (defaults to PNG)
-          this.href = canvas.toDataURL();
-          this.download = "mymeme.png";
+          this.href = canvas.toDataURL('image/jpeg', 1.0);
+          this.download = "mymeme.jpg";
         }, false);
       }
     </script>
