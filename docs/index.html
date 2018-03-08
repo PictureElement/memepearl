@@ -48,17 +48,17 @@
           <div class="col-sm-4">
             <form>
               <div class="form-group">
-                <label for="formControlFile1">Upload image (JPEG only)</label>
-                <input type="file" class="form-control-file" id="file">
+                <label for="image-file">Upload image</label>
+                <input type="file" id="image-file" class="form-control-file" name="image-file" accept=".jpg, .jpeg, .png">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line">
+                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line" value="Top Line">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line">
+                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line" value="Bottom Line">
               </div>
               <div class="form-group">
-                <input type="number" min="1" max="200" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
+                <input type="number" min="1" max="200" value="100" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
               </div>
               <a id="save" class="btn btn-primary" role="button">Save</a>
             </form>
@@ -76,9 +76,14 @@
 
       // Check for canvas support
       if (canvas.getContext) {
-
         // Access the rendering context
         var context = canvas.getContext('2d');
+
+        // Get default values
+        var topLine = document.getElementById("topLine").value;
+        var bottomLine = document.getElementById("bottomLine").value;
+        var fontSize = document.getElementById("fontSize").value;
+        var currentImage = new Image();
       
         function redrawMeme (image, topText, bottomText) {
           // Erase any previously drawn content
@@ -112,30 +117,20 @@
           }
         }
 
-        // Initialization
-        var currentImage = new Image();
-        currentImage.src = "images/placeholder.jpeg";
-        window.topLine = "TOP LINE";
-        window.bottomLine = "BOTTOM LINE";
-        var fontSize = 50;
-        console.log(currentImage);
-        redrawMeme(currentImage, window.topLine, window.bottomLine);
-
         function textChangeHandler (e) {
           var id = e.target.id;
           var text = e.target.value;
           if (id == "topLine") {
-            window.topLine = text;
+            topLine = text;
           }
           else {
-            window.bottomLine = text;
+            bottomLine = text;
           }
           // Redraw canvas
-          redrawMeme(currentImage, window.topLine, window.bottomLine);
+          redrawMeme(currentImage, topLine, bottomLine);
         }
 
         function fileSelectHandler () {
-
           // File list
           var fileList = this.files;
 
@@ -149,33 +144,50 @@
             currentImage.onload = function () {
               console.log('Image has been loaded');
               // Redraw canvas
-              redrawMeme(currentImage, window.topLine, window.bottomLine);
+              redrawMeme(currentImage, topLine, bottomLine);
             }
           }
 
           // Produce a data URL for the file 
           reader.readAsDataURL(fileList[0]); 
         }
-        
-        // Execute textChangeHandler() when a user writes something in the <input> fields
-        document.getElementById("topLine").addEventListener("input", textChangeHandler);
-        document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
 
-        document.getElementById("fontSize").addEventListener("input", function (e) {
-          fontSize = e.target.value;
-          // Redraw canvas
-          redrawMeme(currentImage, window.topLine, window.bottomLine);
-        });
+        function init () {
+          // Set image source
+          currentImage.src = "images/placeholder.jpg";
 
-        // Execute fileSelectHandler() when the user uploads an image
-        document.getElementById("file").addEventListener('change', fileSelectHandler, false);
+          // The callback will be called when the image has finished loading
+          currentImage.onload = function() {
+            redrawMeme(currentImage, topLine, bottomLine);
+          }
 
-        document.getElementById("save").addEventListener('click', function () {
-          // Returns a data URI containing a representation of the image in the 
-          // format specified by the type parameter (defaults to PNG)
-          this.href = canvas.toDataURL('image/jpeg', 1.0);
-          this.download = "mymeme.jpeg";
-        }, false);
+          // Execute textChangeHandler() when a user writes something in the <input> field
+          document.getElementById("topLine").addEventListener("input", textChangeHandler);
+
+          // Execute textChangeHandler() when a user writes something in the <input> field
+          document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
+
+          // Execute callback when a user writes something in the <input> field
+          document.getElementById("fontSize").addEventListener("input", function (e) {
+            fontSize = e.target.value;
+            // Redraw canvas
+            redrawMeme(currentImage, topLine, bottomLine);
+          });
+
+          // Execute fileSelectHandler() when the user uploads an image
+          document.getElementById("image-file").addEventListener('change', fileSelectHandler, false);
+
+          // Execute callback when the user clicks on Save button
+          document.getElementById("save").addEventListener('click', function () {
+            // Returns a data URI containing a representation of the image in the 
+            // format specified by the type parameter (defaults to PNG)
+            this.href = canvas.toDataURL();
+            this.download = "mymeme.png";
+          }, false);
+        }
+
+        // Initialize
+        init();
       }
     </script>
   </body>
