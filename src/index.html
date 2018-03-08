@@ -52,13 +52,13 @@
                 <input type="file" id="image-file" class="form-control-file" name="image-file" accept=".jpg, .jpeg, .png">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line">
+                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line" value="Top Line">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line">
+                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line" value="Bottom Line">
               </div>
               <div class="form-group">
-                <input type="number" min="1" max="200" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
+                <input type="number" min="1" max="200" value="100" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
               </div>
               <a id="save" class="btn btn-primary" role="button">Save</a>
             </form>
@@ -148,9 +148,10 @@
         }
 
         // Initialization
-        var topLine = "TOP LINE";
-        var bottomLine = "BOTTOM LINE";
-        var fontSize = 100;
+        // Get default values
+        var topLine = document.getElementById("topLine").value;
+        var bottomLine = document.getElementById("bottomLine").value;
+        var fontSize = document.getElementById("fontSize").value;
         var currentImage = new Image();
         currentImage.src = "images/placeholder.jpg";
         // The callback will be called when the image has finished loading
