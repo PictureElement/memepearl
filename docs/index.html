@@ -179,10 +179,11 @@
 
           // Execute callback when the user clicks on Save button
           document.getElementById("save").addEventListener('click', function () {
+            // Add download attribute
+            this.download = "mymeme.png";
             // Returns a data URI containing a representation of the image in the 
             // format specified by the type parameter (defaults to PNG)
             this.href = canvas.toDataURL();
-            this.download = "mymeme.png";
           }, false);
         }
 
@@ -192,3 +193,4 @@
     </script>
   </body>
 </html>
+
