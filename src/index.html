@@ -76,9 +76,14 @@
 
       // Check for canvas support
       if (canvas.getContext) {
-
         // Access the rendering context
         var context = canvas.getContext('2d');
+
+        // Get default values
+        var topLine = document.getElementById("topLine").value;
+        var bottomLine = document.getElementById("bottomLine").value;
+        var fontSize = document.getElementById("fontSize").value;
+        var currentImage = new Image();
       
         function redrawMeme (image, topText, bottomText) {
           // Erase any previously drawn content
@@ -147,41 +152,42 @@
           reader.readAsDataURL(fileList[0]); 
         }
 
-        // Initialization
-        // Get default values
-        var topLine = document.getElementById("topLine").value;
-        var bottomLine = document.getElementById("bottomLine").value;
-        var fontSize = document.getElementById("fontSize").value;
-        var currentImage = new Image();
-        currentImage.src = "images/placeholder.jpg";
-        // The callback will be called when the image has finished loading
-        currentImage.onload = function() {
-          redrawMeme(currentImage, topLine, bottomLine);
+        function init () {
+          // Set image source
+          currentImage.src = "images/placeholder.jpg";
+
+          // The callback will be called when the image has finished loading
+          currentImage.onload = function() {
+            redrawMeme(currentImage, topLine, bottomLine);
+          }
+
+          // Execute textChangeHandler() when a user writes something in the <input> field
+          document.getElementById("topLine").addEventListener("input", textChangeHandler);
+
+          // Execute textChangeHandler() when a user writes something in the <input> field
+          document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
+
+          // Execute callback when a user writes something in the <input> field
+          document.getElementById("fontSize").addEventListener("input", function (e) {
+            fontSize = e.target.value;
+            // Redraw canvas
+            redrawMeme(currentImage, topLine, bottomLine);
+          });
+
+          // Execute fileSelectHandler() when the user uploads an image
+          document.getElementById("image-file").addEventListener('change', fileSelectHandler, false);
+
+          // Execute callback when the user clicks on Save button
+          document.getElementById("save").addEventListener('click', function () {
+            // Returns a data URI containing a representation of the image in the 
+            // format specified by the type parameter (defaults to PNG)
+            this.href = canvas.toDataURL();
+            this.download = "mymeme.png";
+          }, false);
         }
 
-        // Execute textChangeHandler() when a user writes something in the <input> field
-        document.getElementById("topLine").addEventListener("input", textChangeHandler);
-
-        // Execute textChangeHandler() when a user writes something in the <input> field
-        document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
-
-        // Execute callback when a user writes something in the <input> field
-        document.getElementById("fontSize").addEventListener("input", function (e) {
-          fontSize = e.target.value;
-          // Redraw canvas
-          redrawMeme(currentImage, topLine, bottomLine);
-        });
-
-        // Execute fileSelectHandler() when the user uploads an image
-        document.getElementById("image-file").addEventListener('change', fileSelectHandler, false);
-
-        // Execute callback when the user clicks on Save button
-        document.getElementById("save").addEventListener('click', function () {
-          // Returns a data URI containing a representation of the image in the 
-          // format specified by the type parameter (defaults to PNG)
-          this.href = canvas.toDataURL();
-          this.download = "mymeme.png";
-        }, false);
+        // Initialize
+        init();
       }
     </script>
   </body>
