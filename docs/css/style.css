@@ -53,10 +53,6 @@ header {
   padding: 0 1.5rem;
 }
 
-.header-logo {
-  font-variant: small-caps;
-}
-
 header:before {
   content: "";
   position: absolute;
@@ -92,6 +88,25 @@ canvas {
   max-width: 100%;
   height: auto;
   border: 1px solid;
+}
+
+.btn-custom {
+  color: white;
+  background-color: #b46494;
+  border-color: #b46494;
+}
+
+.btn-custom:hover {
+  color: white;
+  background-color: #ad5389;
+  border-color: #ad5389;
+}
+
+.btn-custom:focus {
+  color: white;
+  background-color: #ad5389;
+  border-color: #ad5389;
+  box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
 }
 
 /*
