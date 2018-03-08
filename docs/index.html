@@ -148,7 +148,7 @@
             }
           }
 
-          // Produce a data URL for the file 
+          // Produce a data URL for the file
           reader.readAsDataURL(fileList[0]); 
         }
 
@@ -179,12 +179,23 @@
 
           // Execute callback when the user clicks on Save button
           document.getElementById("save").addEventListener('click', function () {
-            // Add download attribute
-            this.download = "mymeme.png";
-            // Returns a data URI containing a representation of the image in the 
-            // format specified by the type parameter (defaults to PNG)
-            this.href = canvas.toDataURL();
-          }, false);
+            var link = this;
+            var url;
+            // Create a Blob object representing the image contained in the canvas.
+            // Using toBlob() is great, because instead of manipulating a base64 
+            // encoded string that you get from toDataURL(), you can now you 
+            // work with the encoded binary data directly.
+            canvas.toBlob(function(blob) {
+              // Create a DOMString containing a URL representing the object given in the parameter
+              url = URL.createObjectURL(blob);
+              // Add download attribute
+              link.download = "mymeme.png";
+              // Add href attribute
+              link.href = url;
+            });
+            // Release the object URL which was previously created with URL.createObjectURL()
+            URL.revokeObjectURL(url);
+          });
         }
 
         // Initialize
