@@ -10,6 +10,7 @@ if (canvas.getContext) {
   var bottomLine = document.getElementById("bottomLine").value;
   var fontSize = document.getElementById("fontSize").value;
   var currentImage = new Image();
+  // Once you set the src attribute image loading will start
   currentImage.src = "images/placeholder.jpg";
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
@@ -18,23 +19,50 @@ if (canvas.getContext) {
   // download attribute
   link.download = "mymeme.png";
 
-  function redrawMeme (image, topText, bottomText) {
+  function redrawMeme(image, topText, bottomText) {
     // Erase any previously drawn content
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw image
     if (image != null) {
+
+      var MAX_WIDTH = 500;
+      var MAX_HEIGHT = 500;
+
       // Use the intrinsic size of image in CSS pixels
-      canvas.width = image.naturalWidth;
-      canvas.height = image.naturalHeight;
-      context.drawImage(image, 0, 0);
+      var width = image.naturalWidth;
+      var height = image.naturalHeight;
+
+      console.log(width);
+      console.log(height);
+
+      // Resize image
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height = height * MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } 
+      else {
+        if (height > MAX_HEIGHT) {
+          width = width * MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+
+      console.log(width);
+      console.log(height);
+
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(image, 0, 0, width, height);
     }
 
     // Text styling
     context.font = fontSize + "px Arial";
     context.textAlign = 'center';
     context.strokeStyle = 'black';
-    context.lineWidth = 4;
+    context.lineWidth = 5;
     context.fillStyle = 'white';
     
     // Draw top line
@@ -63,7 +91,7 @@ if (canvas.getContext) {
     URL.revokeObjectURL(url);
   }
 
-  function textChangeHandler (e) {
+  function textChangeHandler(e) {
     var id = e.target.id;
     var text = e.target.value;
     if (id == "topLine") {
@@ -76,18 +104,21 @@ if (canvas.getContext) {
     redrawMeme(currentImage, topLine, bottomLine);
   }
 
-  function fileSelectHandler () {
+  function fileSelectHandler() {
     // Image file
     var file = this.files[0];
 
     // Create a new instance of FileReader
     var reader = new FileReader();
 
-    reader.onload = function () {
-      // Set the src property for the current image
+    reader.onload = function() {
+      // Once you set the src attribute image loading will start
       currentImage.src = reader.result;
-      // Redraw canvas
-      redrawMeme(currentImage, topLine, bottomLine);
+      // The callback will be called when the image has finished loading
+      currentImage.onload = function() {
+        // Redraw canvas
+        redrawMeme(currentImage, topLine, bottomLine);
+      }
     }
 
     if (file) {
@@ -97,7 +128,7 @@ if (canvas.getContext) {
     }
   }
 
-  function init () {
+  function init() {
     // The callback will be called when the image has finished loading
     currentImage.onload = function() {
       redrawMeme(currentImage, topLine, bottomLine);
@@ -110,7 +141,7 @@ if (canvas.getContext) {
     document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
 
     // Execute callback when a user writes something in the <input> field
-    document.getElementById("fontSize").addEventListener("input", function (e) {
+    document.getElementById("fontSize").addEventListener("input", function(e) {
       fontSize = e.target.value;
       // Redraw canvas
       redrawMeme(currentImage, topLine, bottomLine);
