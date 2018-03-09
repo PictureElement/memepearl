@@ -3,7 +3,8 @@
  */
 
 html {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   font-size: 1rem;
 }
 
@@ -18,8 +19,14 @@ html, body {
 
 .cover-container {
   /* Horizontal and vertical centering */
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /*
@@ -27,7 +34,8 @@ html, body {
  */
 
 .inset-box-shadow {
-  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  -webkit-box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+          box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
 .bg-gray {
@@ -44,6 +52,9 @@ html, body {
 }
 
 .header-brand {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ecf6f8), to(#9ed1dd));
+  background: -webkit-linear-gradient(#ecf6f8, #9ed1dd);
+  background: -o-linear-gradient(#ecf6f8, #9ed1dd);
   background: linear-gradient(#ecf6f8, #9ed1dd);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
@@ -58,9 +69,13 @@ html, body {
 }
 
 .header-wrapper {
+  background-image: -webkit-linear-gradient(45deg, rgba(173, 83, 137, .8), rgba(60, 16, 83, .8));
+  background-image: -o-linear-gradient(45deg, rgba(173, 83, 137, .8), rgba(60, 16, 83, .8));
   background-image: linear-gradient(45deg, rgba(173, 83, 137, .8), rgba(60, 16, 83, .8));
-  background-size: 300% 300%;
-  animation: Background 25s ease infinite;
+  -webkit-background-size: 300% 300%;
+          background-size: 300% 300%;
+  -webkit-animation: Background 25s ease infinite;
+          animation: Background 25s ease infinite;
   position: relative;
   top: 0;
   right: 0;
@@ -72,18 +87,6 @@ html, body {
 
 /* Background animation */
 @-webkit-keyframes Background {
-  0% {
-    background-position: 0% 50%
-  }
-  50% {
-    background-position: 100% 50%
-  }
-  100% {
-    background-position: 0% 50%
-  }
-}
-
-@-moz-keyframes Background {
   0% {
     background-position: 0% 50%
   }
@@ -127,7 +130,8 @@ main {
 }
 
 main .container {
-  box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+          box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   padding: 1.5rem;
 }
 
@@ -159,7 +163,8 @@ canvas {
   color: white;
   background-color: #ad5389;
   border-color: #ad5389;
-  box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
+          box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
 }
 
 /*
