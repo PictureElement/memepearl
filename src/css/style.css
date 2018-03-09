@@ -48,12 +48,13 @@ html, body {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   letter-spacing: -2px;
-  font-size: 4em;
+  font-size: 3em;
 }
 
 .lead-custom {
   font-family: 'Poiret One', cursive;
   letter-spacing: 1px;
+  color: #fff;
 }
 
 .header-wrapper {
