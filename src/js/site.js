@@ -128,6 +128,27 @@ if (canvas.getContext) {
     }
   }
 
+  function grayScaling() {
+    // ImageData object
+    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      // Averaging method: gray = (r + g + b) / 3
+      let gray = (data[i] + data[i+1] + data[i+2]) / 3;
+      // Red channel
+      data[i] = gray;
+      // Green channel
+      data[i+1] = gray;
+      // Blue channel
+      data[i+2] = gray;
+    }
+    // Paint pixel data into the context
+    context.putImageData(imageData, 0, 0);
+  }
+
   function init() {
     // The callback will be called when the image has finished loading
     currentImage.onload = function() {
@@ -148,7 +169,10 @@ if (canvas.getContext) {
     });
 
     // Execute fileSelectHandler() when the user uploads an image
-    document.getElementById("image-file").addEventListener('change', fileSelectHandler, false);
+    document.getElementById("image-file").addEventListener("change", fileSelectHandler, false);
+
+    // Execute grayScaling() when the user clicks the grayscaling button
+    document.getElementById("grayscale-btn").addEventListener("click", grayScaling);
   }
 
   // Initialize
