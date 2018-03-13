@@ -3,7 +3,7 @@ var canvas = document.getElementById('c');
 // Check for canvas support
 if (canvas.getContext) {
   // Access the rendering context
-  var context = canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
 
   // Default values
   var topLine = document.getElementById("topLine").value;
@@ -21,7 +21,7 @@ if (canvas.getContext) {
 
   function redrawMeme(image, topText, bottomText) {
     // Erase any previously drawn content
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw image
     if (image != null) {
@@ -29,9 +29,8 @@ if (canvas.getContext) {
       var MAX_WIDTH = 500;
       var MAX_HEIGHT = 500;
 
-      // Use the intrinsic size of image in CSS pixels
-      var width = image.naturalWidth;
-      var height = image.naturalHeight;
+      var width = image.width;
+      var height = image.height;
 
       console.log(width);
       console.log(height);
@@ -55,26 +54,26 @@ if (canvas.getContext) {
 
       canvas.width = width;
       canvas.height = height;
-      context.drawImage(image, 0, 0, width, height);
+      ctx.drawImage(image, 0, 0, width, height);
     }
 
     // Text styling
-    context.font = fontSize + "px Arial";
-    context.textAlign = 'center';
-    context.strokeStyle = 'black';
-    context.lineWidth = 5;
-    context.fillStyle = 'white';
+    ctx.font = fontSize + "px Arial";
+    ctx.textAlign = 'center';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 5;
+    ctx.fillStyle = 'white';
     
     // Draw top line
     if (topText != null) {
-      context.strokeText(topText, canvas.width / 2, fontSize);
-      context.fillText(topText, canvas.width / 2, fontSize);
+      ctx.strokeText(topText, canvas.width / 2, fontSize);
+      ctx.fillText(topText, canvas.width / 2, fontSize);
     }
 
     // Draw bottom line
     if (bottomText != null) {
-      context.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
-      context.fillText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+      ctx.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+      ctx.fillText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
     }
 
     // Create a Blob object representing the image contained in the canvas.
@@ -83,7 +82,7 @@ if (canvas.getContext) {
     // work with the encoded binary data directly.
     canvas.toBlob(function(blob) {
       // Create a DOMString containing a URL representing the object given in the parameter
-      url = URL.createObjectURL(blob);
+      url = window.URL.createObjectURL(blob);
       // Update href attribute
       link.href = url;
     });
@@ -128,6 +127,89 @@ if (canvas.getContext) {
     }
   }
 
+  function grayScale() {
+    // ImageData object
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      // Averaging method: gray = (r + g + b) / 3
+      let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      // Red channel
+      data[i] = gray;
+      // Green channel
+      data[i + 1] = gray;
+      // Blue channel
+      data[i + 2] = gray;
+    }
+
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
+  }
+
+  function sepiaFilter() {
+    // ImageData object
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      let r = data[i];
+      let g = data[i + 1];
+      let b = data[i + 2];
+      // Red channel
+      data[i] = (r * 0.393)+(g * 0.769)+(b * 0.189);
+      // Green channel
+      data[i + 1] = (r * 0.349)+(g * 0.686)+(b * 0.168);
+      // Blue channel
+      data[i + 2] = (r * 0.272)+(g * 0.534)+(b * 0.131);
+    }
+    
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
+  }
+
+  function colorInvert() {
+    // ImageData object
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      // Red channel
+      data[i] = 255 - data[i];
+      // Green channel
+      data[i+1] = 255 - data[i+1];
+      // Blue channel
+      data[i+2] = 255 - data[i+2];
+    }
+    
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
+  }
+
   function init() {
     // The callback will be called when the image has finished loading
     currentImage.onload = function() {
@@ -148,7 +230,16 @@ if (canvas.getContext) {
     });
 
     // Execute fileSelectHandler() when the user uploads an image
-    document.getElementById("image-file").addEventListener('change', fileSelectHandler, false);
+    document.getElementById("image-file").addEventListener("change", fileSelectHandler, false);
+
+    // Execute grayScale() when the user clicks the Grayscaling button
+    document.getElementById("grayscale-btn").addEventListener("click", grayScale);
+
+    // Execute sepiaFilter() when the user clicks the Sepia button
+    document.getElementById("sepia-btn").addEventListener("click", sepiaFilter);
+
+    // Execute colorInvert() when the user clicks the Invert button
+    document.getElementById("invert-btn").addEventListener("click", colorInvert);
   }
 
   // Initialize

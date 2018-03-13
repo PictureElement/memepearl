@@ -1,9 +1,9 @@
-var canvas2 = document.getElementById('c2');
+var canvas = document.getElementById('c');
 
 // Check for canvas support
-if (canvas2.getContext) {
+if (canvas.getContext) {
   // Access the rendering context
-  var ctx2 = canvas2.getContext('2d');
+  var ctx = canvas.getContext('2d');
 
   // Default values
   var topLine = document.getElementById("topLine").value;
@@ -21,7 +21,7 @@ if (canvas2.getContext) {
 
   function redrawMeme(image, topText, bottomText) {
     // Erase any previously drawn content
-    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw image
     if (image != null) {
@@ -29,7 +29,6 @@ if (canvas2.getContext) {
       var MAX_WIDTH = 500;
       var MAX_HEIGHT = 500;
 
-      // Use the intrinsic size of image in CSS pixels
       var width = image.width;
       var height = image.height;
 
@@ -53,35 +52,35 @@ if (canvas2.getContext) {
       console.log(width);
       console.log(height);
 
-      canvas2.width = width;
-      canvas2.height = height;
-      ctx2.drawImage(image, 0, 0, width, height);
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(image, 0, 0, width, height);
     }
 
     // Text styling
-    ctx2.font = fontSize + "px Arial";
-    ctx2.textAlign = 'center';
-    ctx2.strokeStyle = 'black';
-    ctx2.lineWidth = 5;
-    ctx2.fillStyle = 'white';
+    ctx.font = fontSize + "px Arial";
+    ctx.textAlign = 'center';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 5;
+    ctx.fillStyle = 'white';
     
     // Draw top line
     if (topText != null) {
-      ctx2.strokeText(topText, canvas2.width / 2, fontSize);
-      ctx2.fillText(topText, canvas2.width / 2, fontSize);
+      ctx.strokeText(topText, canvas.width / 2, fontSize);
+      ctx.fillText(topText, canvas.width / 2, fontSize);
     }
 
     // Draw bottom line
     if (bottomText != null) {
-      ctx2.strokeText(bottomText, canvas2.width / 2, canvas2.height - fontSize / 2);
-      ctx2.fillText(bottomText, canvas2.width / 2, canvas2.height - fontSize / 2);
+      ctx.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+      ctx.fillText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
     }
 
     // Create a Blob object representing the image contained in the canvas.
     // Using toBlob() is great, because instead of manipulating a base64 
     // encoded string that you get from toDataURL(), you can now you 
     // work with the encoded binary data directly.
-    canvas2.toBlob(function(blob) {
+    canvas.toBlob(function(blob) {
       // Create a DOMString containing a URL representing the object given in the parameter
       url = window.URL.createObjectURL(blob);
       // Update href attribute
@@ -130,7 +129,7 @@ if (canvas2.getContext) {
 
   function grayScale() {
     // ImageData object
-    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     // One-dimensional array containing the data in the RGBA order
     var data = imageData.data;
     // data represents the Uint8ClampedArray containing the data
@@ -158,7 +157,7 @@ if (canvas2.getContext) {
 
   function sepiaFilter() {
     // ImageData object
-    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     // One-dimensional array containing the data in the RGBA order
     var data = imageData.data;
     // data represents the Uint8ClampedArray containing the data
@@ -174,13 +173,20 @@ if (canvas2.getContext) {
       // Blue channel
       data[i + 2] = (r * 0.272)+(g * 0.534)+(b * 0.131);
     }
-    // Paint pixel data into the context
-    ctx2.putImageData(imageData, 0, 0);
+    
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
   }
 
   function colorInvert() {
     // ImageData object
-    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     // One-dimensional array containing the data in the RGBA order
     var data = imageData.data;
     // data represents the Uint8ClampedArray containing the data
@@ -193,8 +199,15 @@ if (canvas2.getContext) {
       // Blue channel
       data[i+2] = 255 - data[i+2];
     }
-    // Paint pixel data into the context
-    ctx2.putImageData(imageData, 0, 0);
+    
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
   }
 
   function init() {
