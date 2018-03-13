@@ -1,9 +1,9 @@
-var canvas = document.getElementById('c');
+var canvas2 = document.getElementById('c2');
 
 // Check for canvas support
-if (canvas.getContext) {
+if (canvas2.getContext) {
   // Access the rendering context
-  var context = canvas.getContext('2d');
+  var ctx2 = canvas2.getContext('2d');
 
   // Default values
   var topLine = document.getElementById("topLine").value;
@@ -21,7 +21,7 @@ if (canvas.getContext) {
 
   function redrawMeme(image, topText, bottomText) {
     // Erase any previously drawn content
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
     // Draw image
     if (image != null) {
@@ -53,35 +53,35 @@ if (canvas.getContext) {
       console.log(width);
       console.log(height);
 
-      canvas.width = width;
-      canvas.height = height;
-      context.drawImage(image, 0, 0, width, height);
+      canvas2.width = width;
+      canvas2.height = height;
+      ctx2.drawImage(image, 0, 0, width, height);
     }
 
     // Text styling
-    context.font = fontSize + "px Arial";
-    context.textAlign = 'center';
-    context.strokeStyle = 'black';
-    context.lineWidth = 5;
-    context.fillStyle = 'white';
+    ctx2.font = fontSize + "px Arial";
+    ctx2.textAlign = 'center';
+    ctx2.strokeStyle = 'black';
+    ctx2.lineWidth = 5;
+    ctx2.fillStyle = 'white';
     
     // Draw top line
     if (topText != null) {
-      context.strokeText(topText, canvas.width / 2, fontSize);
-      context.fillText(topText, canvas.width / 2, fontSize);
+      ctx2.strokeText(topText, canvas2.width / 2, fontSize);
+      ctx2.fillText(topText, canvas2.width / 2, fontSize);
     }
 
     // Draw bottom line
     if (bottomText != null) {
-      context.strokeText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
-      context.fillText(bottomText, canvas.width / 2, canvas.height - fontSize / 2);
+      ctx2.strokeText(bottomText, canvas2.width / 2, canvas2.height - fontSize / 2);
+      ctx2.fillText(bottomText, canvas2.width / 2, canvas2.height - fontSize / 2);
     }
 
     // Create a Blob object representing the image contained in the canvas.
     // Using toBlob() is great, because instead of manipulating a base64 
     // encoded string that you get from toDataURL(), you can now you 
     // work with the encoded binary data directly.
-    canvas.toBlob(function(blob) {
+    canvas2.toBlob(function(blob) {
       // Create a DOMString containing a URL representing the object given in the parameter
       url = URL.createObjectURL(blob);
       // Update href attribute
@@ -128,25 +128,66 @@ if (canvas.getContext) {
     }
   }
 
-  function grayScaling() {
+  function grayScale() {
     // ImageData object
-    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
     // One-dimensional array containing the data in the RGBA order
     var data = imageData.data;
     // data represents the Uint8ClampedArray containing the data
     // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
     for (let i = 0; i < data.length; i += 4) {
       // Averaging method: gray = (r + g + b) / 3
-      let gray = (data[i] + data[i+1] + data[i+2]) / 3;
+      let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
       // Red channel
       data[i] = gray;
       // Green channel
-      data[i+1] = gray;
+      data[i + 1] = gray;
       // Blue channel
-      data[i+2] = gray;
+      data[i + 2] = gray;
     }
     // Paint pixel data into the context
-    context.putImageData(imageData, 0, 0);
+    ctx2.putImageData(imageData, 0, 0);
+  }
+
+  function sepiaFilter() {
+    // ImageData object
+    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      let r = data[i];
+      let g = data[i + 1];
+      let b = data[i + 2];
+      // Red channel
+      data[i] = (r * 0.393)+(g * 0.769)+(b * 0.189);
+      // Green channel
+      data[i + 1] = (r * 0.349)+(g * 0.686)+(b * 0.168);
+      // Blue channel
+      data[i + 2] = (r * 0.272)+(g * 0.534)+(b * 0.131);
+    }
+    // Paint pixel data into the context
+    ctx2.putImageData(imageData, 0, 0);
+  }
+
+  function colorInvert() {
+    // ImageData object
+    var imageData = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    // One-dimensional array containing the data in the RGBA order
+    var data = imageData.data;
+    // data represents the Uint8ClampedArray containing the data
+    // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
+    for (let i = 0; i < data.length; i += 4) {
+      // Red channel
+      data[i] = 255 - data[i];
+      // Green channel
+      data[i+1] = 255 - data[i+1];
+      // Blue channel
+      data[i+2] = 255 - data[i+2];
+    }
+    // Paint pixel data into the context
+    ctx2.putImageData(imageData, 0, 0);
   }
 
   function init() {
@@ -171,8 +212,14 @@ if (canvas.getContext) {
     // Execute fileSelectHandler() when the user uploads an image
     document.getElementById("image-file").addEventListener("change", fileSelectHandler, false);
 
-    // Execute grayScaling() when the user clicks the grayscaling button
-    document.getElementById("grayscale-btn").addEventListener("click", grayScaling);
+    // Execute grayScale() when the user clicks the Grayscaling button
+    document.getElementById("grayscale-btn").addEventListener("click", grayScale);
+
+    // Execute sepiaFilter() when the user clicks the Sepia button
+    document.getElementById("sepia-btn").addEventListener("click", sepiaFilter);
+
+    // Execute colorInvert() when the user clicks the Invert button
+    document.getElementById("invert-btn").addEventListener("click", colorInvert);
   }
 
   // Initialize

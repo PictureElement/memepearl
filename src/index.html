@@ -56,11 +56,14 @@
       </header>
     </div>
     <div class="shape-separator"></div>
+    <canvas class="d-none" id="c1">
+      Sorry, the &lt;canvas&gt; element is not supported by your browser
+    </canvas>
     <main>
       <div class="container rounded bg-gray box-shadow">
         <div class="row">
           <div class="canvas-wrapper col-sm-6">
-            <canvas id="c" border-secondary rounded">
+            <canvas id="c2" border-secondary rounded">
               Sorry, the &lt;canvas&gt; element is not supported by your browser
             </canvas>
           </div>
@@ -81,6 +84,7 @@
               </div>
               <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
               <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
+              <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
               <button id="save" class="btn btn-custom" type="button">Save</button>
             </form>
           </div>
