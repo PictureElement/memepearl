@@ -65,25 +65,49 @@
             </canvas>
           </div>
           <div class="col-sm-6">
-            <form>
-              <div class="form-group">
-                <label for="image-file">Upload image</label>
-                <input type="file" id="image-file" class="form-control-file" name="image-file" accept=".jpg, .jpeg, .png">
+          
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Upload</span>
               </div>
-              <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="topLine" placeholder="Top Line" value="Top Line">
+              <div class="custom-file">
+                <input type="file" id="image-file" class="custom-file-input" name="image-file" accept=".jpg, .jpeg, .png">
+                <label class="custom-file-label" for="image-file">Choose file</label>
               </div>
-              <div class="form-group">
-                <input type="text" class="form-control form-control-sm" id="bottomLine" placeholder="Bottom Line" value="Bottom Line">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Top line</span>
               </div>
-              <div class="form-group">
-                <input type="number" min="1" max="200" value="50" class="form-control form-control-sm" id="fontSize" placeholder="Font Size (1-200)">
+              <input type="text" id="topLine" class="form-control" aria-label="top line">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Bottom line</span>
               </div>
+              <input type="text" id="bottomLine" class="form-control" aria-label="bottom line"></textarea>
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Font size</span>
+              </div>
+              <input type="number" min="1" max="200" value="50" class="form-control form-control-sm" id="fontSize">
+            </div>
+
+            <div class="btn-group mb-3" role="group" aria-label="filter group">
               <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
               <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
               <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
-              <button id="save" class="btn btn-custom" type="button">Save</button>
-            </form>
+            </div>
+
+            <div class="btn-group mb-3" role="group" aria-label="save/reset group">
+              <button id="reset-btn" class="btn btn-custom" type="button">Reset</button>
+              <a id="save" class="btn btn-custom" href="#" role="button">Save</a>
+            </div>
+            
           </div>
         </div>
       </div>
