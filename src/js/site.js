@@ -30,8 +30,8 @@ if (canvas2.getContext) {
       var MAX_HEIGHT = 500;
 
       // Use the intrinsic size of image in CSS pixels
-      var width = image.naturalWidth;
-      var height = image.naturalHeight;
+      var width = image.width;
+      var height = image.height;
 
       console.log(width);
       console.log(height);
@@ -83,7 +83,7 @@ if (canvas2.getContext) {
     // work with the encoded binary data directly.
     canvas2.toBlob(function(blob) {
       // Create a DOMString containing a URL representing the object given in the parameter
-      url = URL.createObjectURL(blob);
+      url = window.URL.createObjectURL(blob);
       // Update href attribute
       link.href = url;
     });
@@ -145,8 +145,15 @@ if (canvas2.getContext) {
       // Blue channel
       data[i + 2] = gray;
     }
-    // Paint pixel data into the context
-    ctx2.putImageData(imageData, 0, 0);
+
+    // Create an ImageBitmap containing bitmap data from the given image source.
+    // The image source can be <img>, SVG <image>, <video>, <canvas>, 
+    // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement, 
+    // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
+    createImageBitmap(imageData).then(function(imgBitmap) {
+      // Redraw canvas
+      redrawMeme(imgBitmap, topLine, bottomLine);
+    });
   }
 
   function sepiaFilter() {
