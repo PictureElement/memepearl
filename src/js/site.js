@@ -138,8 +138,19 @@ if (canvas.getContext) {
     // data represents the Uint8ClampedArray containing the data
     // in the RGBA order [r0, g0, b0, a0, r1, g1, b1, a1, ..., rn, gn, bn, an]
     for (let i = 0; i < data.length; i += 4) {
+      
       // Averaging method: gray = (r + g + b) / 3
-      let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      // let gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+      
+      // Luma method (Photoshop/Gimp): gray = r * 0.3 + g * 0.59 + b * 0.11
+      let gray = (data[i] * 0.3 + data[i + 1] * 0.59 + data[i + 2] * 0.11);
+
+      // Luma method (ITU-R BT.709): gray = r * 0.2126 + g * 0.7152 + b * 0.0722
+      // let gray = (data[i] * 0.2126 + data[i + 1] * 0.7152 + data[i + 2] * 0.0722);
+
+      // Luma method (ITU-R BT.2100): gray = r * 0.2627 + g * 0.6780 + b * 0.0593
+      // let gray = (data[i] * 0.2627 + data[i + 1] * 0.6780 + data[i + 2] * 0.0593);
+
       // Red channel
       data[i] = gray;
       // Green channel
