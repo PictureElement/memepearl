@@ -60,52 +60,59 @@
       <div class="container rounded bg-gray box-shadow">
         <div class="row">
           <div class="canvas-wrapper col-sm-6">
-            <canvas id="c" border-secondary rounded">
+            <canvas id="c" class="border-secondary rounded">
               Sorry, the &lt;canvas&gt; element is not supported by your browser
             </canvas>
           </div>
           <div class="col-sm-6">
           
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Upload</span>
-              </div>
-              <div class="custom-file">
-                <input type="file" id="image-file" class="custom-file-input" name="image-file" accept=".jpg, .jpeg, .png">
-                <label class="custom-file-label" for="image-file">Choose file</label>
-              </div>
+            <div class="input-group input-group-sm mb-3">
+              <input type="file" id="image-file" name="image file" accept=".jpg, .jpeg, .png">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">Top line</span>
+                <label class="input-group-text label-custom" for="topLine">Top line</label>
               </div>
               <input type="text" id="topLine" class="form-control" aria-label="top line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">Bottom line</span>
+                <label class="input-group-text label-custom" for="bottomLine">Bottom line</label>
               </div>
-              <input type="text" id="bottomLine" class="form-control" aria-label="bottom line"></textarea>
+              <input type="text" id="bottomLine" class="form-control" aria-label="bottom line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">Font size</span>
+                <label class="input-group-text label-custom" for="fontSize">Font size</label>
               </div>
-              <input type="number" min="1" max="200" value="50" class="form-control form-control-sm" id="fontSize">
+              <input type="range" min="1" max="100" step="1" class="form-control form-control-sm custom-slider" id="fontSize">
+              <div class="input-group-append">
+                <span class="input-group-text" id="font-value">50</span>
+              </div>
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text label-custom" for="brightness">Brightness</label>
+              </div>
+              <input type="range" min="1" max="100" step="1" class="form-control form-control-sm custom-slider" id="brightness">
+              <div class="input-group-append">
+                <span class="input-group-text" id="brightness-value">50</span>
+              </div>
             </div>
 
             <div class="btn-group mb-3" role="group" aria-label="filter group">
-              <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
-              <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
-              <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
+              <button id="grayscale-btn" class="btn btn-sm btn-custom" type="button">Grayscale</button>
+              <button id="sepia-btn" class="btn btn-sm btn-custom" type="button">Sepia</button>
+              <button id="invert-btn" class="btn btn-sm btn-custom" type="button">Invert</button>
             </div>
 
             <div class="btn-group mb-3" role="group" aria-label="save/reset group">
-              <button id="reset-btn" class="btn btn-custom" type="button">Reset</button>
-              <a id="save" class="btn btn-custom" href="#" role="button">Save</a>
+              <button id="reset-btn" class="btn btn-sm btn-danger" type="button">Reset</button>
+              <a id="save" class="btn btn-sm btn-success" href="#" role="button">Save</a>
             </div>
             
           </div>
