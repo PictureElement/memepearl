@@ -213,6 +213,22 @@ if (canvas.getContext) {
     });
   }
 
+  function myFunction() {
+    var txt;
+    if (confirm("Press a button!")) {
+        txt = "You pressed OK!";
+    } else {
+        txt = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = txt;
+  }
+
+  function reset() {
+    if (window.confirm("Reset changes?")) {
+      redrawMeme(unalteredImage, topLine, bottomLine);
+    }
+  }
+
   function init() {
     // The callback will be called when the image has finished loading
     alteredImage.onload = function() {
@@ -243,6 +259,9 @@ if (canvas.getContext) {
 
     // Execute colorInvert() when the user clicks the Invert button
     document.getElementById("invert-btn").addEventListener("click", colorInvert);
+
+    // Execute reset() when the user clicks the Reset button
+    document.getElementById("reset-btn").addEventListener("click", reset);
   }
 
   // Initialize
