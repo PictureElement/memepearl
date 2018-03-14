@@ -6,9 +6,10 @@ if (canvas.getContext) {
   var ctx = canvas.getContext('2d');
 
   // Default values
-  var topLine = document.getElementById("topLine").value;
-  var bottomLine = document.getElementById("bottomLine").value;
-  var fontSize = document.getElementById("fontSize").value;
+  var topLine = "";
+  var bottomLine = "";
+  var fontSize = 50;
+  var tempAdjustmentValue = 0;
   var unalteredImage  = new Image();
   var alteredImage = new Image();
   // Once you set the src attribute image loading will start
@@ -34,8 +35,8 @@ if (canvas.getContext) {
       var width = image.width;
       var height = image.height;
 
-      console.log(width);
-      console.log(height);
+      //console.log(width);
+      //console.log(height);
 
       // Resize image
       if (width > height) {
@@ -51,11 +52,15 @@ if (canvas.getContext) {
         }
       }
 
-      console.log(width);
-      console.log(height);
+      //console.log(width);
+      //console.log(height);
 
       canvas.width = width;
       canvas.height = height;
+      // Draw image onto the canvas.
+      // Source can be CSSImageValue, an HTMLImageElement, an SVGImageElement, 
+      // an HTMLVideoElement, an HTMLCanvasElement, an ImageBitmap, or an 
+      // OffscreenCanvas.
       ctx.drawImage(image, 0, 0, width, height);
     }
 
@@ -181,11 +186,11 @@ if (canvas.getContext) {
       let g = data[i + 1];
       let b = data[i + 2];
       // Red channel
-      data[i] = (r * 0.393)+(g * 0.769)+(b * 0.189);
+      data[i] = (r * 0.393) + (g * 0.769) + (b * 0.189);
       // Green channel
-      data[i + 1] = (r * 0.349)+(g * 0.686)+(b * 0.168);
+      data[i + 1] = (r * 0.349) + (g * 0.686) + (b * 0.168);
       // Blue channel
-      data[i + 2] = (r * 0.272)+(g * 0.534)+(b * 0.131);
+      data[i + 2] = (r * 0.272) + (g * 0.534) + (b * 0.131);
     }
     
     // Create an ImageBitmap containing bitmap data from the given image source.
@@ -209,9 +214,9 @@ if (canvas.getContext) {
       // Red channel
       data[i] = 255 - data[i];
       // Green channel
-      data[i+1] = 255 - data[i+1];
+      data[i + 1] = 255 - data[i + 1];
       // Blue channel
-      data[i+2] = 255 - data[i+2];
+      data[i + 2] = 255 - data[i + 2];
     }
     
     // Create an ImageBitmap containing bitmap data from the given image source.
@@ -224,14 +229,27 @@ if (canvas.getContext) {
     });
   }
 
-  function myFunction() {
-    var txt;
-    if (confirm("Press a button!")) {
-        txt = "You pressed OK!";
-    } else {
-        txt = "You pressed Cancel!";
-    }
-    document.getElementById("demo").innerHTML = txt;
+  var fontSizeSliderValue = document.getElementById("font-value");
+
+  function setFontSize(e) {
+    // Dynamic range slider to display the current value
+    fontSizeSliderValue.innerHTML = this.value;
+
+    fontSize = e.target.value;
+    // Redraw canvas
+    redrawMeme(alteredImage, topLine, bottomLine);
+  }
+
+  var brightnessSliderValue = document.getElementById("brightness-value");
+
+  function setBrightness(e) {
+    // Dynamic range slider to display the current value
+    brightnessSliderValue.innerHTML = this.value;
+    
+    // Get temperature adjustment value
+    tempAdjustmentValue = e.target.value;
+    
+    //ctx.filer = 'brightness()'
   }
 
   function reset() {
@@ -246,18 +264,17 @@ if (canvas.getContext) {
       redrawMeme(alteredImage, topLine, bottomLine);
     }
 
-    // Execute textChangeHandler() when a user writes something in the <input> field
+    // Execute textChangeHandler() when the user writes something in the <input> field
     document.getElementById("topLine").addEventListener("input", textChangeHandler);
 
-    // Execute textChangeHandler() when a user writes something in the <input> field
+    // Execute textChangeHandler() when the user writes something in the <input> field
     document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
 
-    // Execute callback when a user writes something in the <input> field
-    document.getElementById("fontSize").addEventListener("input", function(e) {
-      fontSize = e.target.value;
-      // Redraw canvas
-      redrawMeme(alteredImage, topLine, bottomLine);
-    });
+    // Execute callback when the user writes something in the <input> field
+    document.getElementById("fontSize").addEventListener("input", setFontSize);
+      
+    // Execute callback when the user writes something in the <input> field
+    document.getElementById("brightness").addEventListener("input", setBrightness);
 
     // Execute fileSelectHandler() when the user uploads an image
     document.getElementById("image-file").addEventListener("change", fileSelectHandler, false);

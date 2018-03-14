@@ -147,7 +147,7 @@ canvas {
   border: 1px solid;
 }
 
-.btn-custom {
+.btn-custom, .label-custom {
   color: white;
   background-color: #b46494;
   border-color: #b46494;
@@ -165,6 +165,42 @@ canvas {
   border-color: #ad5389;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
           box-shadow: 0 0 0 0.2rem rgba(173,83,137,.5);
+}
+
+/*
+ * Custom range slider
+ */
+
+.custom-slider {
+   -webkit-appearance: none;
+    width: 100%;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.custom-slider:hover {
+    opacity: 1;
+}
+
+.custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #b46494;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #b46494;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /*
