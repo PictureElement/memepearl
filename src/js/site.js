@@ -9,9 +9,11 @@ if (canvas.getContext) {
   var topLine = document.getElementById("topLine").value;
   var bottomLine = document.getElementById("bottomLine").value;
   var fontSize = document.getElementById("fontSize").value;
-  var currentImage = new Image();
+  var unalteredImage  = new Image();
+  var alteredImage = new Image();
   // Once you set the src attribute image loading will start
-  currentImage.src = "images/placeholder.jpg";
+  unalteredImage.src = "images/placeholder.jpg";
+  alteredImage.src = "images/placeholder.jpg";
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
   // href attribute
@@ -100,7 +102,7 @@ if (canvas.getContext) {
       bottomLine = text;
     }
     // Redraw canvas
-    redrawMeme(currentImage, topLine, bottomLine);
+    redrawMeme(alteredImage, topLine, bottomLine);
   }
 
   function fileSelectHandler() {
@@ -112,11 +114,12 @@ if (canvas.getContext) {
 
     reader.onload = function() {
       // Once you set the src attribute image loading will start
-      currentImage.src = reader.result;
+      unalteredImage.src = reader.result;
+      alteredImage.src = reader.result;
       // The callback will be called when the image has finished loading
-      currentImage.onload = function() {
+      alteredImage.onload = function() {
         // Redraw canvas
-        redrawMeme(currentImage, topLine, bottomLine);
+        redrawMeme(alteredImage, topLine, bottomLine);
       }
     }
 
@@ -212,8 +215,8 @@ if (canvas.getContext) {
 
   function init() {
     // The callback will be called when the image has finished loading
-    currentImage.onload = function() {
-      redrawMeme(currentImage, topLine, bottomLine);
+    alteredImage.onload = function() {
+      redrawMeme(alteredImage, topLine, bottomLine);
     }
 
     // Execute textChangeHandler() when a user writes something in the <input> field
@@ -226,7 +229,7 @@ if (canvas.getContext) {
     document.getElementById("fontSize").addEventListener("input", function(e) {
       fontSize = e.target.value;
       // Redraw canvas
-      redrawMeme(currentImage, topLine, bottomLine);
+      redrawMeme(alteredImage, topLine, bottomLine);
     });
 
     // Execute fileSelectHandler() when the user uploads an image
