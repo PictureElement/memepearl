@@ -5,7 +5,8 @@ if (canvas.getContext) {
   // Access the rendering context
   var ctx = canvas.getContext('2d');
 
-  // Default values
+  //-------------------------------------- DEFAULTS --------------------------------------
+
   var topLine = "";
   var bottomLine = "";
   var image = new Image();
@@ -29,6 +30,8 @@ if (canvas.getContext) {
   brightnessLabel.innerHTML = "0";
   brightnessSlider.value = "0";
   var brightness = 0;
+
+  //-------------------------------------- FUNCTIONS --------------------------------------
 
   function clearCanvas() {
     // Erase any previously drawn content
@@ -261,7 +264,7 @@ if (canvas.getContext) {
     redrawMeme(image, topLine, bottomLine);
   }
 
-  function setBrightness(e) {
+  function setBrightness() {
     // Dynamic range slider to display the current value
     brightnessLabel.innerHTML = this.value;
 
@@ -279,7 +282,7 @@ if (canvas.getContext) {
       brightnessLabel.innerHTML = "0";
       brightnessSlider.value = "0";
       brightness = 0;
-      
+
       // Reset font size
       fontSizeLabel.innerHTML = "50";
       fontSizeSlider.value = "50";
@@ -290,6 +293,8 @@ if (canvas.getContext) {
     }
   }
 
+  //------------------------------------ INIT FUNCTION ------------------------------------
+
   function init() {
     // The callback will be called when the image has finished loading
     image.onload = function() {
@@ -297,31 +302,31 @@ if (canvas.getContext) {
       redrawMeme(image, topLine, bottomLine);
     }
 
-    // Execute textChangeHandler() when the user writes something in the <input> field
+    // Execute textChangeHandler() when the value of the specified <input> element is changed.
     document.getElementById("topLine-input").addEventListener("input", textChangeHandler);
 
-    // Execute textChangeHandler() when the user writes something in the <input> field
+    // Execute textChangeHandler() when the value of the specified <input> element is changed.
     document.getElementById("bottomLine-input").addEventListener("input", textChangeHandler);
 
-    // Execute callback when the user writes something in the <input> field
+    // Execute setFontSize() when the value of the specified <input> element is changed.
     document.getElementById("fontSize-input").addEventListener("input", setFontSize);
 
-    // Execute callback when the user writes something in the <input> field
+    // Execute setBrightness() when the value of the specified <input> element is changed.
     document.getElementById("brightness-input").addEventListener("input", setBrightness);
 
-    // Execute fileSelectHandler() when the user uploads an image
+    // Execute fileSelectHandler() when a change to the specified <input> value is committed by the user.
     document.getElementById("file-input").addEventListener("change", fileSelectHandler, false);
 
-    // Execute grayScale() when the user clicks the Grayscaling button
+    // Execute grayScale() when a pointing device button is pressed and released on the specified element.
     document.getElementById("grayscale-btn").addEventListener("click", grayScale);
 
-    // Execute sepiaFilter() when the user clicks the Sepia button
+    // Execute sepiaFilter() when a pointing device button is pressed and released on the specified element.
     document.getElementById("sepia-btn").addEventListener("click", sepiaFilter);
 
-    // Execute colorInvert() when the user clicks the Invert button
+    // Execute colorInvert() when a pointing device button is pressed and released on the specified element.
     document.getElementById("invert-btn").addEventListener("click", colorInvert);
 
-    // Execute reset() when the user clicks the Reset button
+    // Execute reset() when a pointing device button is pressed and released on the specified element.
     document.getElementById("reset-btn").addEventListener("click", reset);
   }
 
