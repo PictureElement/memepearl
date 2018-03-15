@@ -42,7 +42,7 @@
         <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
         <h1 class="header-brand text-gradient">MemePearl</h1>
         <p class="lead-custom lead text-white">
-          A simple and easy to use meme generator with photo effects and 
+          A simple and easy to use meme generator with photo effects and
           filters. Upload your image to generate funny memes instantly.
         </p>
         <p class="lead">
@@ -65,7 +65,7 @@
             </canvas>
           </div>
           <div class="col-sm-6">
-          
+
             <div class="input-group input-group-sm mb-3">
               <input type="file" id="image-file" name="image file" accept=".jpg, .jpeg, .png">
             </div>
@@ -88,7 +88,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text label-custom" for="fontSize">Font size</label>
               </div>
-              <input type="range" min="1" max="100" step="1" class="form-control form-control-sm custom-slider" id="fontSize">
+              <input type="range" min="1" max="100" value="50" class="form-control form-control-sm custom-slider" id="fontSize">
               <div class="input-group-append">
                 <span class="input-group-text" id="font-value">50</span>
               </div>
@@ -98,9 +98,9 @@
               <div class="input-group-prepend">
                 <label class="input-group-text label-custom" for="brightness">Brightness</label>
               </div>
-              <input type="range" min="1" max="100" step="1" class="form-control form-control-sm custom-slider" id="brightness">
+              <input type="range" min="-100" max="100" value="0" class="form-control form-control-sm custom-slider" id="brightness">
               <div class="input-group-append">
-                <span class="input-group-text" id="brightness-value">50</span>
+                <span class="input-group-text" id="brightness-value">0</span>
               </div>
             </div>
 
@@ -114,7 +114,7 @@
               <button id="reset-btn" class="btn btn-sm btn-danger" type="button">Reset</button>
               <a id="save" class="btn btn-sm btn-success" href="#" role="button">Save</a>
             </div>
-            
+
           </div>
         </div>
       </div>
