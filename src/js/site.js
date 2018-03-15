@@ -8,8 +8,6 @@ if (canvas.getContext) {
   // Default values
   var topLine = "";
   var bottomLine = "";
-  var fontSize = 50;
-  var brightnessAdjustmentValue = 0;
   var image = new Image();
   // Once you set the src attribute image loading will start
   image.src = "images/placeholder.jpg";
@@ -19,6 +17,18 @@ if (canvas.getContext) {
   link.href = url;
   // download attribute
   link.download = "mymeme.png";
+
+  var fontSizeLabel = document.getElementById("fontSize-label");
+  var fontSizeSlider = document.getElementById("fontSize-input");
+  fontSizeLabel.innerHTML = "50";
+  fontSizeSlider.value = "50";
+  var fontSize = 50;
+
+  var brightnessLabel = document.getElementById("brightness-label");
+  var brightnessSlider = document.getElementById("brightness-input");
+  brightnessLabel.innerHTML = "0";
+  brightnessSlider.value = "0";
+  var brightness = 0;
 
   function clearCanvas() {
     // Erase any previously drawn content
@@ -60,7 +70,7 @@ if (canvas.getContext) {
       canvas.height = height;
 
       // Set image brightness
-      ctx.filter = `brightness(${brightnessAdjustmentValue + 100}%)`;
+      ctx.filter = `brightness(${brightness + 100}%)`;
       // Draw image onto the canvas.
       // Source can be CSSImageValue, an HTMLImageElement, an SVGImageElement,
       // an HTMLVideoElement, an HTMLCanvasElement, an ImageBitmap, or an
@@ -106,7 +116,7 @@ if (canvas.getContext) {
   function textChangeHandler(e) {
     var id = e.target.id;
     var text = e.target.value;
-    if (id == "topLine") {
+    if (id == "topLine-input") {
       topLine = text;
     }
     else {
@@ -239,26 +249,24 @@ if (canvas.getContext) {
     });
   }
 
-  var fontSizeSliderValue = document.getElementById("font-value");
-
-  function setFontSize(e) {
+  function setFontSize() {
     // Dynamic range slider to display the current value
-    fontSizeSliderValue.innerHTML = this.value;
+    fontSizeLabel.innerHTML = this.value;
 
-    fontSize = e.target.value;
+    // Update font size
+    fontSize = Number(this.value);
+
     clearCanvas();
     // Redraw canvas
     redrawMeme(image, topLine, bottomLine);
   }
 
-  var brightnessSliderValue = document.getElementById("brightness-value");
-
   function setBrightness(e) {
     // Dynamic range slider to display the current value
-    brightnessSliderValue.innerHTML = this.value;
+    brightnessLabel.innerHTML = this.value;
 
     // Update brightness value
-    brightnessAdjustmentValue = Number(this.value);
+    brightness = Number(this.value);
 
     clearCanvas();
     // Redraw canvas
@@ -267,6 +275,16 @@ if (canvas.getContext) {
 
   function reset() {
     if (window.confirm("Reset changes?")) {
+      // Reset brightness
+      brightnessLabel.innerHTML = "0";
+      brightnessSlider.value = "0";
+      brightness = 0;
+      
+      // Reset font size
+      fontSizeLabel.innerHTML = "50";
+      fontSizeSlider.value = "50";
+      fontSize = 50;
+
       clearCanvas();
       redrawMeme(image, topLine, bottomLine);
     }
@@ -280,19 +298,19 @@ if (canvas.getContext) {
     }
 
     // Execute textChangeHandler() when the user writes something in the <input> field
-    document.getElementById("topLine").addEventListener("input", textChangeHandler);
+    document.getElementById("topLine-input").addEventListener("input", textChangeHandler);
 
     // Execute textChangeHandler() when the user writes something in the <input> field
-    document.getElementById("bottomLine").addEventListener("input", textChangeHandler);
+    document.getElementById("bottomLine-input").addEventListener("input", textChangeHandler);
 
     // Execute callback when the user writes something in the <input> field
-    document.getElementById("fontSize").addEventListener("input", setFontSize);
+    document.getElementById("fontSize-input").addEventListener("input", setFontSize);
 
     // Execute callback when the user writes something in the <input> field
-    document.getElementById("brightness").addEventListener("input", setBrightness);
+    document.getElementById("brightness-input").addEventListener("input", setBrightness);
 
     // Execute fileSelectHandler() when the user uploads an image
-    document.getElementById("image-file").addEventListener("change", fileSelectHandler, false);
+    document.getElementById("file-input").addEventListener("change", fileSelectHandler, false);
 
     // Execute grayScale() when the user clicks the Grayscaling button
     document.getElementById("grayscale-btn").addEventListener("click", grayScale);

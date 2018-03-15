@@ -67,40 +67,40 @@
           <div class="col-sm-6">
 
             <div class="input-group input-group-sm mb-3">
-              <input type="file" id="image-file" name="image file" accept=".jpg, .jpeg, .png">
+              <input type="file" id="file-input" name="image file" accept=".jpg, .jpeg, .png">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="topLine">Top line</label>
+                <label class="input-group-text label-custom" for="topLine-input">Top line</label>
               </div>
-              <input type="text" id="topLine" class="form-control" aria-label="top line">
+              <input type="text" id="topLine-input" class="form-control" aria-label="top line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="bottomLine">Bottom line</label>
+                <label class="input-group-text label-custom" for="bottomLine-input">Bottom line</label>
               </div>
-              <input type="text" id="bottomLine" class="form-control" aria-label="bottom line">
+              <input type="text" id="bottomLine-input" class="form-control" aria-label="bottom line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="fontSize">Font size</label>
+                <label class="input-group-text label-custom" for="fontSize-input">Font size</label>
               </div>
-              <input type="range" min="1" max="100" value="50" class="form-control form-control-sm custom-slider" id="fontSize">
+              <input type="range" min="1" max="100" class="form-control form-control-sm custom-slider" id="fontSize-input">
               <div class="input-group-append">
-                <span class="input-group-text" id="font-value">50</span>
+                <span class="input-group-text" id="fontSize-label"></span>
               </div>
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="brightness">Brightness</label>
+                <label class="input-group-text label-custom" for="brightness-input">Brightness</label>
               </div>
-              <input type="range" min="-100" max="100" value="0" class="form-control form-control-sm custom-slider" id="brightness">
+              <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="brightness-input">
               <div class="input-group-append">
-                <span class="input-group-text" id="brightness-value">0</span>
+                <span class="input-group-text" id="brightness-label"></span>
               </div>
             </div>
 
