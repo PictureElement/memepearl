@@ -41,15 +41,15 @@ function redrawMeme(image, topText, bottomText) {
     canvas.width = width;
     canvas.height = height;
 
-    // Set image brightness
-    ctx.filter = 'brightness(' + (brightness + 100) + '%)';
+    // Set image brightness and contrast
+    ctx.filter = 'brightness(' + (brightness + 100) + '%)' + 'contrast(' + (contrast + 100) + '%)';
 
     // Draw image onto the canvas.
     // Source can be CSSImageValue, an HTMLImageElement, an SVGImageElement,
     // an HTMLVideoElement, an HTMLCanvasElement, an ImageBitmap, or an
     // OffscreenCanvas.
     ctx.drawImage(image, 0, 0, width, height);
-    
+
     // Disable brightness (not required for text)
     ctx.filter = "none";
   }
@@ -247,12 +247,29 @@ function setBrightness() {
   redrawMeme(image, topLine, bottomLine);
 }
 
+function setContrast() {
+  // Dynamic range slider to display the current value
+  contrastLabel.innerHTML = this.value;
+
+  // Update contrast value
+  contrast = Number(this.value);
+
+  clearCanvas();
+  // Redraw canvas
+  redrawMeme(image, topLine, bottomLine);
+}
+
 function reset() {
   if (window.confirm("Reset changes?")) {
     // Reset brightness
     brightnessLabel.innerHTML = "0";
     brightnessSlider.value = "0";
     brightness = 0;
+
+    // Reset contrast
+    contrastLabel.innerHTML = "0";
+    contrastSlider.value = "0";
+    contrast = 0;
 
     // Reset font size
     fontSizeLabel.innerHTML = "50";
@@ -282,6 +299,9 @@ function init() {
 
   // Execute setBrightness() when the value of the specified <input> element is changed.
   document.getElementById("brightness-input").addEventListener("input", setBrightness);
+
+  // Execute setContrast() when the value of the specified <input> element is changed.
+  document.getElementById("contrast-input").addEventListener("input", setContrast);
 
   // Execute fileSelectHandler() when a change to the specified <input> value is committed by the user.
   document.getElementById("file-input").addEventListener("change", fileSelectHandler, false);
@@ -330,6 +350,12 @@ if (canvas.getContext) {
   brightnessLabel.innerHTML = "0";
   brightnessSlider.value = "0";
   var brightness = 0;
+
+  var contrastLabel = document.getElementById("contrast-label");
+  var contrastSlider = document.getElementById("contrast-input");
+  contrastLabel.innerHTML = "0";
+  contrastSlider.value = "0";
+  var contrast = 0;
 
   // Initialize
   init();
