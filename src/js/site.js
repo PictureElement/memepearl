@@ -111,6 +111,7 @@ function fileSelectHandler() {
   reader.onload = function() {
     // Once you set the src attribute image loading will start
     unalteredImage.src = reader.result;
+    alteredImage.src = reader.result;
     // The callback will be called when the image has finished loading
     unalteredImage.onload = function() {
       clearCanvas();
