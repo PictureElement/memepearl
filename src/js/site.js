@@ -99,7 +99,7 @@ function textChangeHandler(e) {
   }
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImageBitmap, topLine, bottomLine);
+  redrawMeme(imageBitmapCurrent, topLine, bottomLine);
 }
 
 function fileSelectHandler() {
@@ -117,7 +117,8 @@ function fileSelectHandler() {
     unalteredImage.onload = function() {
       // Reset Bitmap on file selection
       createImageBitmap(unalteredImage).then(function(imgBitmap) {
-        alteredImageBitmap = imgBitmap;
+        imageBitmapPrevious = imgBitmap;
+        imageBitmapCurrent = imgBitmap;
       });
       clearCanvas();
       // Redraw canvas
@@ -136,9 +137,9 @@ function grayScale() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  // Save image state before applying the filter
+  // Update previous state
   createImageBitmap(imageData).then(function(imgBitmap) {
-    alteredImageBitmap = imgBitmap;
+    imageBitmapPrevious = imgBitmap;
   });
 
   // One-dimensional array containing the data in the RGBA order
@@ -172,6 +173,8 @@ function grayScale() {
   // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement,
   // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
   createImageBitmap(imageData).then(function(imgBitmap) {
+    // Update current state
+    imageBitmapCurrent = imgBitmap;
     clearCanvas();
     // Redraw canvas
     redrawMeme(imgBitmap, topLine, bottomLine);
@@ -182,9 +185,9 @@ function sepiaFilter() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  // Save image state before applying the filter
+  // Update previous state
   createImageBitmap(imageData).then(function(imgBitmap) {
-    alteredImageBitmap = imgBitmap;
+    imageBitmapPrevious = imgBitmap;
   });
 
   // One-dimensional array containing the data in the RGBA order
@@ -208,6 +211,8 @@ function sepiaFilter() {
   // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement,
   // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
   createImageBitmap(imageData).then(function(imgBitmap) {
+    // Update current state
+    imageBitmapCurrent = imgBitmap;
     clearCanvas();
     // Redraw canvas
     redrawMeme(imgBitmap, topLine, bottomLine);
@@ -218,9 +223,9 @@ function colorInvert() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  // Save image state before applying the filter
+  // Update previous state
   createImageBitmap(imageData).then(function(imgBitmap) {
-    alteredImageBitmap = imgBitmap;
+    imageBitmapPrevious = imgBitmap;
   });
 
   // One-dimensional array containing the data in the RGBA order
@@ -241,6 +246,8 @@ function colorInvert() {
   // HTMLImageElement, SVGImageElement, HTMLVideoElement, HTMLCanvasElement,
   // Blob, ImageData, ImageBitmap, or OffscreenCanvas object.
   createImageBitmap(imageData).then(function(imgBitmap) {
+    // Update current state
+    imageBitmapCurrent = imgBitmap;
     clearCanvas();
     // Redraw canvas
     redrawMeme(imgBitmap, topLine, bottomLine);
@@ -256,7 +263,7 @@ function setFontSize() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImageBitmap, topLine, bottomLine);
+  redrawMeme(imageBitmapCurrent, topLine, bottomLine);
 }
 
 function setBrightness() {
@@ -268,7 +275,7 @@ function setBrightness() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImageBitmap, topLine, bottomLine);
+  redrawMeme(imageBitmapCurrent, topLine, bottomLine);
 }
 
 function setContrast() {
@@ -280,7 +287,7 @@ function setContrast() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImageBitmap, topLine, bottomLine);
+  redrawMeme(imageBitmapCurrent, topLine, bottomLine);
 }
 
 function reset() {
@@ -311,7 +318,8 @@ function init() {
 
     // Bitmap of the initial unaltered image
     createImageBitmap(unalteredImage).then(function(imgBitmap) {
-      alteredImageBitmap = imgBitmap;
+      imageBitmapPrevious = imgBitmap;
+      imageBitmapCurrent = imgBitmap;
     });
 
     clearCanvas();
@@ -360,7 +368,8 @@ if (canvas.getContext) {
   var bottomLine = "";
   var unalteredImage = new Image();
   unalteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
-  var alteredImageBitmap;
+  var imageBitmapPrevious; // Previous image state
+  var imageBitmapCurrent; // Current image state
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
   link.href = url; // href attribute
