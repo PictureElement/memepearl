@@ -7,6 +7,7 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+// image can be an 'ImageBitmap' or 'HTMLImageElement'
 function redrawMeme(image, topText, bottomText) {
 
   // Draw image
@@ -98,7 +99,7 @@ function textChangeHandler(e) {
   }
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImage, topLine, bottomLine);
+  redrawMeme(alteredImageBitmap, topLine, bottomLine);
 }
 
 function fileSelectHandler() {
@@ -111,6 +112,7 @@ function fileSelectHandler() {
   reader.onload = function() {
     // Once you set the src attribute image loading will start
     unalteredImage.src = reader.result;
+    // Reset altered image on file selection
     alteredImage.src = reader.result;
     // The callback will be called when the image has finished loading
     unalteredImage.onload = function() {
@@ -130,6 +132,8 @@ function fileSelectHandler() {
 function grayScale() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  // Save image state before filter application
+  var alteredImageBitmap = createImageBitmap(imageData);
   // One-dimensional array containing the data in the RGBA order
   var data = imageData.data;
   // data represents the Uint8ClampedArray containing the data
@@ -233,7 +237,7 @@ function setFontSize() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImage, topLine, bottomLine);
+  redrawMeme(alteredImageBitmap, topLine, bottomLine);
 }
 
 function setBrightness() {
@@ -245,7 +249,7 @@ function setBrightness() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImage, topLine, bottomLine);
+  redrawMeme(alteredImageBitmap, topLine, bottomLine);
 }
 
 function setContrast() {
@@ -257,7 +261,7 @@ function setContrast() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(alteredImage, topLine, bottomLine);
+  redrawMeme(alteredImageBitmap, topLine, bottomLine);
 }
 
 function reset() {
@@ -287,6 +291,7 @@ function init() {
   unalteredImage.onload = function() {
     clearCanvas();
     redrawMeme(unalteredImage, topLine, bottomLine);
+    console.log(unalteredImage);
   };
 
   // Execute textChangeHandler() when the value of the specified <input> element is changed.
@@ -336,9 +341,8 @@ if (canvas.getContext) {
   link.href = url; // href attribute
   link.download = "mymeme.png"; // download attribute
 
-  var alteredImage = new Image();
-  alteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
-
+  var alteredImageBitmap = createImageBitmap(unalteredImage);
+  
   document.getElementById("grayscale-btn").value = "0";
   document.getElementById("sepia-btn").value = "0";
   document.getElementById("invert-btn").value = "0";
