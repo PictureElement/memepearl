@@ -112,10 +112,13 @@ function fileSelectHandler() {
   reader.onload = function() {
     // Once you set the src attribute image loading will start
     unalteredImage.src = reader.result;
-    // Reset altered image on file selection
-    alteredImage.src = reader.result;
+
     // The callback will be called when the image has finished loading
     unalteredImage.onload = function() {
+      // Reset Bitmap on file selection
+      createImageBitmap(unalteredImage).then(function(imgBitmap) {
+        alteredImageBitmap = imgBitmap;
+      });
       clearCanvas();
       // Redraw canvas
       redrawMeme(unalteredImage, topLine, bottomLine);
@@ -132,8 +135,12 @@ function fileSelectHandler() {
 function grayScale() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  // Save image state before filter application
-  var alteredImageBitmap = createImageBitmap(imageData);
+
+  // Save image state before applying the filter
+  createImageBitmap(imageData).then(function(imgBitmap) {
+    alteredImageBitmap = imgBitmap;
+  });
+
   // One-dimensional array containing the data in the RGBA order
   var data = imageData.data;
   // data represents the Uint8ClampedArray containing the data
@@ -174,6 +181,12 @@ function grayScale() {
 function sepiaFilter() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  // Save image state before applying the filter
+  createImageBitmap(imageData).then(function(imgBitmap) {
+    alteredImageBitmap = imgBitmap;
+  });
+
   // One-dimensional array containing the data in the RGBA order
   var data = imageData.data;
   // data represents the Uint8ClampedArray containing the data
@@ -204,6 +217,12 @@ function sepiaFilter() {
 function colorInvert() {
   // ImageData object
   var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  // Save image state before applying the filter
+  createImageBitmap(imageData).then(function(imgBitmap) {
+    alteredImageBitmap = imgBitmap;
+  });
+
   // One-dimensional array containing the data in the RGBA order
   var data = imageData.data;
   // data represents the Uint8ClampedArray containing the data
@@ -289,9 +308,14 @@ function reset() {
 function init() {
   // The callback will be called when the image has finished loading
   unalteredImage.onload = function() {
+
+    // Bitmap of the initial unaltered image
+    createImageBitmap(unalteredImage).then(function(imgBitmap) {
+      alteredImageBitmap = imgBitmap;
+    });
+
     clearCanvas();
     redrawMeme(unalteredImage, topLine, bottomLine);
-    console.log(unalteredImage);
   };
 
   // Execute textChangeHandler() when the value of the specified <input> element is changed.
@@ -336,13 +360,12 @@ if (canvas.getContext) {
   var bottomLine = "";
   var unalteredImage = new Image();
   unalteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
+  var alteredImageBitmap;
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
   link.href = url; // href attribute
   link.download = "mymeme.png"; // download attribute
 
-  var alteredImageBitmap = createImageBitmap(unalteredImage);
-  
   document.getElementById("grayscale-btn").value = "0";
   document.getElementById("sepia-btn").value = "0";
   document.getElementById("invert-btn").value = "0";
