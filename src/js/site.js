@@ -98,7 +98,7 @@ function textChangeHandler(e) {
   }
   clearCanvas();
   // Redraw canvas
-  redrawMeme(UnalteredImage, topLine, bottomLine);
+  redrawMeme(alteredImage, topLine, bottomLine);
 }
 
 function fileSelectHandler() {
@@ -110,12 +110,12 @@ function fileSelectHandler() {
 
   reader.onload = function() {
     // Once you set the src attribute image loading will start
-    UnalteredImage.src = reader.result;
+    unalteredImage.src = reader.result;
     // The callback will be called when the image has finished loading
-    UnalteredImage.onload = function() {
+    unalteredImage.onload = function() {
       clearCanvas();
       // Redraw canvas
-      redrawMeme(UnalteredImage, topLine, bottomLine);
+      redrawMeme(unalteredImage, topLine, bottomLine);
     };
   };
 
@@ -232,7 +232,7 @@ function setFontSize() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(UnalteredImage, topLine, bottomLine);
+  redrawMeme(alteredImage, topLine, bottomLine);
 }
 
 function setBrightness() {
@@ -244,7 +244,7 @@ function setBrightness() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(UnalteredImage, topLine, bottomLine);
+  redrawMeme(alteredImage, topLine, bottomLine);
 }
 
 function setContrast() {
@@ -256,7 +256,7 @@ function setContrast() {
 
   clearCanvas();
   // Redraw canvas
-  redrawMeme(UnalteredImage, topLine, bottomLine);
+  redrawMeme(alteredImage, topLine, bottomLine);
 }
 
 function reset() {
@@ -277,15 +277,15 @@ function reset() {
     fontSize = 50;
 
     clearCanvas();
-    redrawMeme(UnalteredImage, topLine, bottomLine);
+    redrawMeme(unalteredImage, topLine, bottomLine);
   }
 }
 
 function init() {
   // The callback will be called when the image has finished loading
-  UnalteredImage.onload = function() {
+  unalteredImage.onload = function() {
     clearCanvas();
-    redrawMeme(UnalteredImage, topLine, bottomLine);
+    redrawMeme(unalteredImage, topLine, bottomLine);
   };
 
   // Execute textChangeHandler() when the value of the specified <input> element is changed.
@@ -328,15 +328,15 @@ if (canvas.getContext) {
   // Defaults
   var topLine = "";
   var bottomLine = "";
-  var UnalteredImage = new Image();
-  UnalteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
+  var unalteredImage = new Image();
+  unalteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
   link.href = url; // href attribute
   link.download = "mymeme.png"; // download attribute
 
-  var AlteredImage = new Image();
-  AlteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
+  var alteredImage = new Image();
+  alteredImage.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
 
   document.getElementById("grayscale-btn").value = "0";
   document.getElementById("sepia-btn").value = "0";
