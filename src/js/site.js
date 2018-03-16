@@ -1,6 +1,6 @@
 var canvas = document.getElementById('c');
 
-//-------------------------------------- FUNCTIONS ---------------------------------------
+//--------------------------------- FUNCTIONS ----------------------------------
 
 function clearCanvas() {
   // Erase any previously drawn content
@@ -319,25 +319,25 @@ function init() {
   document.getElementById("reset-btn").addEventListener("click", reset);
 }
 
-//----------------------------------------- MAIN -----------------------------------------
+//------------------------------------ MAIN ------------------------------------
 
 // Check for canvas support
 if (canvas.getContext) {
-  // Access the rendering context
-  var ctx = canvas.getContext('2d');
+  var ctx = canvas.getContext('2d'); // Access the rendering context
 
   // Defaults
   var topLine = "";
   var bottomLine = "";
   var image = new Image();
-  // Once you set the src attribute image loading will start
-  image.src = "images/placeholder.jpg";
+  image.src = "images/placeholder.jpg"; // Once you set the src attribute image loading will start
   var link = document.getElementById("save");
   var url = "images/placeholder.jpg";
-  // href attribute
-  link.href = url;
-  // download attribute
-  link.download = "mymeme.png";
+  link.href = url; // href attribute
+  link.download = "mymeme.png"; // download attribute
+
+  document.getElementById("grayscale-btn").value = "0";
+  document.getElementById("sepia-btn").value = "0";
+  document.getElementById("invert-btn").value = "0";
 
   var fontSizeLabel = document.getElementById("fontSize-label");
   var fontSizeSlider = document.getElementById("fontSize-input");
