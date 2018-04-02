@@ -36,9 +36,6 @@ function redrawMeme(image, topText, bottomText) {
       }
     }
 
-    //console.log(width);
-    //console.log(height);
-
     canvas.width = width;
     canvas.height = height;
 
@@ -263,70 +260,6 @@ function colorInvert() {
     redrawMeme(imgBitmap, topLine, bottomLine);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function setFontSize() {
   // Dynamic range slider to display the current value
