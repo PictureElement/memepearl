@@ -49,9 +49,19 @@ function redrawMeme(image, topText, bottomText) {
     // Source can be CSSImageValue, an HTMLImageElement, an SVGImageElement,
     // an HTMLVideoElement, an HTMLCanvasElement, an ImageBitmap, or an
     // OffscreenCanvas.
+    // drawImage() is chosen because unlike putImageData() is affected by the
+    // canvas transformation matrix.
     ctx.drawImage(image, 0, 0, width, height);
 
-    // Disable brightness (not required for text)
+    /*
+    // Update previous and current state before applying text
+    createImageBitmap(image).then(function(imgBitmap) {
+      imageBitmapPrevious = imageBitmapCurrent;
+      imageBitmapCurrent = imgBitmap;
+    });
+    */
+
+    // Disable filters (not required for text)
     ctx.filter = "none";
   }
 
@@ -254,6 +264,70 @@ function colorInvert() {
   });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function setFontSize() {
   // Dynamic range slider to display the current value
   fontSizeLabel.innerHTML = this.value;
@@ -307,23 +381,25 @@ function reset() {
     fontSizeSlider.value = "50";
     fontSize = 50;
 
-    clearCanvas();
-    redrawMeme(unalteredImage, topLine, bottomLine);
+    // Reset previous and current states. Draw default image onto canvas
+    createImageBitmap(unalteredImage).then(function(imgBitmap) {
+      imageBitmapPrevious = imgBitmap;
+      imageBitmapCurrent = imgBitmap;
+      clearCanvas();
+      redrawMeme(unalteredImage, topLine, bottomLine);
+    });
   }
 }
 
 function init() {
   // The callback will be called when the image has finished loading
   unalteredImage.onload = function() {
-
-    // Bitmap of the initial unaltered image
+    // Set previous and current states. Draw default image onto canvas
     createImageBitmap(unalteredImage).then(function(imgBitmap) {
       imageBitmapPrevious = imgBitmap;
       imageBitmapCurrent = imgBitmap;
+      redrawMeme(unalteredImage, topLine, bottomLine);
     });
-
-    clearCanvas();
-    redrawMeme(unalteredImage, topLine, bottomLine);
   };
 
   // Execute textChangeHandler() when the value of the specified <input> element is changed.
