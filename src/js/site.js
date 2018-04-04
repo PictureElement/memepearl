@@ -21,7 +21,7 @@ function init(url) {
   image.src = url;
   image.onload = function() {
     redraw(image, topLine, bottomLine, fontSize, brightness, contrast, grayscale, sepia, invert);
-  }
+  };
 }
 
 // Initialize canvas with selected image
@@ -33,7 +33,7 @@ $("#file-input").on("change", function() {
     // Update url
     url = reader.result;
     init(url);
-  }
+  };
 
   if (file) {
     reader.readAsDataURL(file);
