@@ -1,15 +1,14 @@
 /*
- * Base structure
+ * BASE
  */
 
 html {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 1rem;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 html, body {
@@ -30,7 +29,7 @@ html, body {
 }
 
 /*
- * Helper classes
+ * HELPER CLASSES
  */
 
 .inset-box-shadow {
@@ -43,12 +42,12 @@ html, body {
 }
 
 /*
- * Header
+ * HEADER
  */
 
  header {
   max-width: 45em;
-  padding: 0 1.5rem;
+  padding: 0;
 }
 
 .header-brand {
@@ -59,13 +58,13 @@ html, body {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   letter-spacing: -2px;
-  font-size: 3em;
+  font-size: 3.2em;
+  font-family: 'Pacifico', cursive;
 }
 
 .lead-custom {
-  font-family: 'Poiret One', cursive;
-  letter-spacing: 1px;
   color: #fff;
+  max-width: 600px;
 }
 
 .header-wrapper {
@@ -122,7 +121,7 @@ html, body {
 }
 
 /*
- * Main
+ * MAIN
  */
 
 main {
@@ -130,7 +129,6 @@ main {
 }
 
 main .container {
-  -webkit-box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   padding: 1.5rem;
 }
@@ -146,6 +144,11 @@ canvas {
   height: auto;
   border: 1px solid;
 }
+
+/*
+ * FILTER BUTTON STYLE
+ */
+
 
 .btn-custom {
   color: white;
@@ -171,17 +174,27 @@ canvas {
 }
 
 /*
- * Custom range slider
+ * TEXT INPUT STYLE
+ */
+
+input[type="text"]:focus {
+  box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
+  border: 1px solid #ad5389;
+}
+
+/*
+ * CUSTOM RANGE SLIDER
  */
 
 .custom-slider {
   -webkit-appearance: none;
   width: 100%;
-  background: #d3d3d3;
+  background: #fff;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  border: 1px solid #ced4da;
 }
 
 .custom-slider:hover {
@@ -189,9 +202,8 @@ canvas {
 }
 
 .custom-slider.focus, .custom-slider:focus {
-  outline: 0;
-  box-shadow: none;
-  border: 1px solid #ced4da;
+  box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
+  border: 1px solid #ad5389;
 }
 
 .custom-slider::-webkit-slider-thumb {
@@ -213,7 +225,7 @@ canvas {
 }
 
 /*
- * Footer
+ * FOOTER
  */
 
 footer a {
@@ -226,7 +238,7 @@ footer a:hover {
 }
 
 /*
- * Media queries
+ * MEDIA QUERIES
  */
 
 /* Small devices (landscape phones, 576px and up) */
