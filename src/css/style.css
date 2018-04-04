@@ -1,5 +1,5 @@
 /*
- * Base structure
+ * BASE
  */
 
 html {
@@ -30,7 +30,7 @@ html, body {
 }
 
 /*
- * Helper classes
+ * HELPER CLASSES
  */
 
 .inset-box-shadow {
@@ -43,7 +43,7 @@ html, body {
 }
 
 /*
- * Header
+ * HEADER
  */
 
  header {
@@ -122,7 +122,7 @@ html, body {
 }
 
 /*
- * Main
+ * MAIN
  */
 
 main {
@@ -146,6 +146,11 @@ canvas {
   height: auto;
   border: 1px solid;
 }
+
+/*
+ * FILTER BUTTON STYLE
+ */
+
 
 .btn-custom {
   color: white;
@@ -171,17 +176,27 @@ canvas {
 }
 
 /*
- * Custom range slider
+ * TEXT INPUT STYLE
+ */
+
+input[type="text"]:focus {
+  box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
+  border: 1px solid #ad5389;
+}
+
+/*
+ * CUSTOM RANGE SLIDER
  */
 
 .custom-slider {
   -webkit-appearance: none;
   width: 100%;
-  background: #d3d3d3;
+  background: #fff;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  border: 1px solid #ced4da;
 }
 
 .custom-slider:hover {
@@ -189,9 +204,8 @@ canvas {
 }
 
 .custom-slider.focus, .custom-slider:focus {
-  outline: 0;
-  box-shadow: none;
-  border: 1px solid #ced4da;
+  box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
+  border: 1px solid #ad5389;
 }
 
 .custom-slider::-webkit-slider-thumb {
@@ -213,7 +227,7 @@ canvas {
 }
 
 /*
- * Footer
+ * FOOTER
  */
 
 footer a {
@@ -226,7 +240,7 @@ footer a:hover {
 }
 
 /*
- * Media queries
+ * MEDIA QUERIES
  */
 
 /* Small devices (landscape phones, 576px and up) */
