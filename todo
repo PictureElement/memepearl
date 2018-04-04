@@ -1,5 +1,0 @@
-1. update current and previous image states
-
-2. Add value attribute to grayscale, sepia and invert buttons in order to implement toggle state.
-
-3. check global and local variables.
