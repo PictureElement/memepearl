@@ -3,6 +3,7 @@
  */
 
 html {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 1rem;
 }
@@ -26,6 +27,7 @@ html, body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  overflow: hidden;
 }
 
 /*
@@ -46,7 +48,7 @@ html, body {
  */
 
  header {
-  max-width: 45em;
+  max-width: 400px;
   padding: 0;
 }
 
@@ -64,7 +66,6 @@ html, body {
 
 .lead-custom {
   color: #fff;
-  max-width: 600px;
 }
 
 .header-wrapper {
@@ -129,6 +130,7 @@ main {
 }
 
 main .container {
+  -webkit-box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
   padding: 1.5rem;
 }
@@ -170,6 +172,7 @@ canvas {
 
 .btn-custom.focus, .btn-custom:focus {
   outline: 0;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -178,6 +181,7 @@ canvas {
  */
 
 input[type="text"]:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   border: 1px solid #ad5389;
 }
@@ -193,6 +197,8 @@ input[type="text"]:focus {
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
+  -webkit-transition: opacity .2s;
+  -o-transition: opacity .2s;
   transition: opacity .2s;
   border: 1px solid #ced4da;
 }
@@ -202,6 +208,7 @@ input[type="text"]:focus {
 }
 
 .custom-slider.focus, .custom-slider:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   border: 1px solid #ad5389;
 }
@@ -212,6 +219,7 @@ input[type="text"]:focus {
   width: 20px;
   height: 20px;
   background: #b46494;
+  -webkit-border-radius: 50%;
   border-radius: 50%;
   cursor: pointer;
 }
