@@ -167,7 +167,7 @@ canvas {
 
 .btn-custom.focus, .btn-custom:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgb(180,100,148);
+  box-shadow: none;
 }
 
 /*

@@ -14,29 +14,28 @@
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <!-- icons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
     <link rel="manifest" href="manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <!-- scripts -->
-    <script defer src="https://buttons.github.io/buttons.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="js/site.js"></script>
   </head>
   <body>
-    <!--<button class="back-to-top-button" aria-label="back to top">↑</button>-->
     <div class="header-wrapper inset-box-shadow cover-container d-flex p-3 mx-auto flex-column text-center">
       <header>
         <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
@@ -45,77 +44,84 @@
           A simple and easy to use meme generator with photo effects and
           filters. Upload your image to generate funny memes instantly.
         </p>
-        <p class="lead">
-          <a class="github-button" href="https://github.com/PictureElement" data-size="large" aria-label="Follow @PictureElement on GitHub">
-            Follow @PictureElement
-          </a>
-          <a class="github-button" href="https://github.com/PictureElement/memegen" data-icon="octicon-star" data-size="large" aria-label="Star PictureElement/memegen on GitHub">
-            Star
-          </a>
-        </p>
+        <a href="https://github.com/PictureElement" class="badge badge-light px-3 py-2"><i class="fa fa-github" aria-hidden="true"></i> Follow @PictureElement</a>
+        <a href="https://github.com/PictureElement/quizninja" class="badge badge-light px-3 py-2 ml-1 mt-2"><i class="fa fa-star" aria-hidden="true"></i> Star</a>
       </header>
     </div>
     <div class="shape-separator"></div>
     <main>
       <div class="container rounded bg-gray box-shadow">
         <div class="row">
+
           <div class="canvas-wrapper col-sm-6">
             <canvas id="c" class="border-secondary rounded">
               Sorry, the &lt;canvas&gt; element is not supported by your browser
             </canvas>
           </div>
+          
           <div class="col-sm-6">
-
             <div class="input-group input-group-sm mb-3">
               <input type="file" id="file-input" name="image file" accept=".jpg, .jpeg, .png">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="topLine-input">Top line</label>
+                <label class="input-group-text" for="topLine-input">Top line</label>
               </div>
               <input type="text" id="topLine-input" class="form-control" aria-label="top line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="bottomLine-input">Bottom line</label>
+                <label class="input-group-text" for="bottomLine-input">Bottom line</label>
               </div>
               <input type="text" id="bottomLine-input" class="form-control" aria-label="bottom line">
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="fontSize-input">Font size</label>
+                <label class="input-group-text" for="fontSize-input">Font size</label>
               </div>
               <input type="range" min="1" max="100" class="form-control form-control-sm custom-slider" id="fontSize-input">
               <div class="input-group-append">
-                <span class="input-group-text" id="fontSize-label"></span>
+                <span class="input-group-text" id="fontSize-label">50</span>
               </div>
             </div>
 
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text label-custom" for="brightness-input">Brightness</label>
+                <label class="input-group-text" for="brightness-input">Brightness</label>
               </div>
               <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="brightness-input">
               <div class="input-group-append">
-                <span class="input-group-text" id="brightness-label"></span>
+                <span class="input-group-text" id="brightness-label">0</span>
               </div>
             </div>
 
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="contrast-input">Contrast</label>
+              </div>
+              <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="contrast-input">
+              <div class="input-group-append">
+                <span class="input-group-text" id="contrast-label">0</span>
+              </div>
+            </div>
+
+            <!-- FILTER GROUP -->
             <div class="btn-group mb-3" role="group" aria-label="filter group">
               <button id="grayscale-btn" class="btn btn-sm btn-custom" type="button">Grayscale</button>
               <button id="sepia-btn" class="btn btn-sm btn-custom" type="button">Sepia</button>
               <button id="invert-btn" class="btn btn-sm btn-custom" type="button">Invert</button>
             </div>
 
+            <!-- SAVE/RESET GROUP -->
             <div class="btn-group mb-3" role="group" aria-label="save/reset group">
               <button id="reset-btn" class="btn btn-sm btn-danger" type="button">Reset</button>
-              <a id="save" class="btn btn-sm btn-success" href="#" role="button">Save</a>
+              <a id="save-btn" class="btn btn-sm btn-success" href="#" role="button">Save</a>
             </div>
-
           </div>
+          
         </div>
       </div>
     </main>
