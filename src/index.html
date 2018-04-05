@@ -37,7 +37,7 @@
   </head>
   <body class="inset-box-shadow">
 
-    <div class="container text-center p-3 header-wrapper">
+    <div class="container-fluid text-center header-wrapper">
       <header>
         <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
         <h1 class="header-brand text-gradient">MemePearl</h1>
@@ -50,25 +50,15 @@
       </header>
     </div>
     
-    <div class="container text-center p-3 main-wrapper">
+    <div class="container-fluid text-center main-wrapper">
       <main>
-          
+        
         <div class="canvas-wrapper">
           <canvas id="c" class="border-dark rounded img-thumbnail">
             Sorry, the &lt;canvas&gt; element is not supported by your browser
           </canvas>
         </div>
-        
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
-          </div>
-          <div class="custom-file">
-            <input type="file" id="file-input" name="image file" accept=".jpg, .jpeg, .png">
-            <label class="custom-file-label" for="file-input">Choose file</label>
-          </div>
-        </div>
-        
+
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <label class="input-group-text" for="topLine-input">Top</label>
@@ -82,7 +72,7 @@
           </div>
           <input type="text" id="bottomLine-input" class="form-control" aria-label="bottom line">
         </div>
-        
+      
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <label class="input-group-text" for="fontSize-input"><i class="fa fa-font" aria-hidden="true"></i></label>
@@ -113,7 +103,7 @@
           </div>
         </div>
         
-        <div class="btn-group filter-group" role="group" aria-label="filter group">
+        <div class="btn-group" role="group" aria-label="filter group">
           <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
           <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
           <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
@@ -121,20 +111,25 @@
         
         <div class="btn-group" role="group" aria-label="save/reset group">
           <button id="reset-btn" class="btn btn-danger" type="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+          <button class="btn btn-custom">
+            <label for="file-input" class="m-0">
+              <i class="fa fa-upload" aria-hidden="true"></i><input type="file" id="file-input" hidden name="image file" accept=".jpg, .jpeg, .png">
+            </label>
+          </button>
           <a id="save-btn" class="btn btn-success" href="#" role="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
         </div>
 
       </main>
     </div>
-
-    <div class="container text-center p-3 footer-wrapper">
+  
+    <div class="container-fluid text-center footer-wrapper">
       <footer>
         <a href="https://pictureelement.github.io/portfolio-2/">
           <i class="fa fa-code" style="font-size:20px;color:#ad5389;" aria-hidden="true"></i> with <i class="fa fa-heart" style="font-size:16px;color:#ad5389;" aria-hidden="true"></i> by PictureElement
         </a>
       </footer>
     </div>
-
+    
     <script>
       /* Register service worker */
       if ('serviceWorker' in navigator) {
