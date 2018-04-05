@@ -8,8 +8,8 @@ var contrast = 0;
 var grayscale = 0;
 var sepia = 0;
 var invert = 0;
-var MAX_WIDTH = 500;
-var MAX_HEIGHT = 500;
+var MAX_WIDTH = 600;
+var MAX_HEIGHT = 600;
 var url = "images/placeholder.jpg";
 var image = new Image();
 
@@ -154,8 +154,8 @@ $("#reset-btn").on("click", function() {
     sepia = 0;
     invert = 0;
 
-    $("#topLine-input").val("");
-    $("#bottomLine-input").val("");
+    $("#topLine-input").val("Top text");
+    $("#bottomLine-input").val("Bottom text");
     $("#fontSize-label").html(fontSize);
     $("#fontSize-input").val(fontSize);
     $("#brightness-label").html(brightness);

@@ -35,8 +35,9 @@
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="js/site.js"></script>
   </head>
-  <body>
-    <div class="header-wrapper inset-box-shadow cover-container d-flex p-3 mx-auto flex-column text-center">
+  <body class="inset-box-shadow">
+
+    <div class="container text-center p-3 header-wrapper">
       <header>
         <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
         <h1 class="header-brand text-gradient">MemePearl</h1>
@@ -48,88 +49,92 @@
         <a href="https://github.com/PictureElement/quizninja" class="badge badge-light px-3 py-2 ml-1 mt-2"><i class="fa fa-star" aria-hidden="true"></i> Star</a>
       </header>
     </div>
-    <div class="shape-separator"></div>
-    <main>
-      <div class="container rounded bg-gray box-shadow">
-        <div class="row">
-
-          <div class="canvas-wrapper col-sm-6">
-            <canvas id="c" class="border-secondary rounded">
-              Sorry, the &lt;canvas&gt; element is not supported by your browser
-            </canvas>
-          </div>
+    
+    <div class="container text-center p-3 main-wrapper">
+      <main>
           
-          <div class="col-sm-6">
-            <div class="input-group input-group-sm mb-3">
-              <input type="file" id="file-input" name="image file" accept=".jpg, .jpeg, .png">
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="topLine-input">Top line</label>
-              </div>
-              <input type="text" id="topLine-input" class="form-control" aria-label="top line">
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="bottomLine-input">Bottom line</label>
-              </div>
-              <input type="text" id="bottomLine-input" class="form-control" aria-label="bottom line">
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="fontSize-input">Font size</label>
-              </div>
-              <input type="range" min="1" max="100" class="form-control form-control-sm custom-slider" id="fontSize-input">
-              <div class="input-group-append">
-                <span class="input-group-text" id="fontSize-label">50</span>
-              </div>
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="brightness-input">Brightness</label>
-              </div>
-              <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="brightness-input">
-              <div class="input-group-append">
-                <span class="input-group-text" id="brightness-label">0</span>
-              </div>
-            </div>
-
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="contrast-input">Contrast</label>
-              </div>
-              <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="contrast-input">
-              <div class="input-group-append">
-                <span class="input-group-text" id="contrast-label">0</span>
-              </div>
-            </div>
-
-            <!-- FILTER GROUP -->
-            <div class="btn-group mb-3" role="group" aria-label="filter group">
-              <button id="grayscale-btn" class="btn btn-sm btn-custom" type="button">Grayscale</button>
-              <button id="sepia-btn" class="btn btn-sm btn-custom" type="button">Sepia</button>
-              <button id="invert-btn" class="btn btn-sm btn-custom" type="button">Invert</button>
-            </div>
-
-            <!-- SAVE/RESET GROUP -->
-            <div class="btn-group mb-3" role="group" aria-label="save/reset group">
-              <button id="reset-btn" class="btn btn-sm btn-danger" type="button">Reset</button>
-              <a id="save-btn" class="btn btn-sm btn-success" href="#" role="button">Save</a>
-            </div>
-          </div>
-          
+        <div class="canvas-wrapper">
+          <canvas id="c" class="border-dark rounded img-thumbnail">
+            Sorry, the &lt;canvas&gt; element is not supported by your browser
+          </canvas>
         </div>
-      </div>
-    </main>
-    <footer class="text-center p-4">
-      <a href="https://pictureelement.github.io/portfolio-2/">
-        <i class="fa fa-code" style="font-size:20px;color:#ad5389;" aria-hidden="true"></i> with <i class="fa fa-heart" style="font-size:16px;color:#ad5389;" aria-hidden="true"></i> by PictureElement
-      </a>
-    </footer>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
+          </div>
+          <div class="custom-file">
+            <input type="file" id="file-input" name="image file" accept=".jpg, .jpeg, .png">
+            <label class="custom-file-label" for="file-input">Choose file</label>
+          </div>
+        </div>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="topLine-input">Top</label>
+          </div>
+          <input type="text" id="topLine-input" class="form-control" aria-label="top line">
+        </div>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="bottomLine-input">Bottom</label>
+          </div>
+          <input type="text" id="bottomLine-input" class="form-control" aria-label="bottom line">
+        </div>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="fontSize-input"><i class="fa fa-font" aria-hidden="true"></i></label>
+          </div>
+          <input type="range" min="1" max="100" class="form-control form-control-sm custom-slider" id="fontSize-input">
+          <div class="input-group-append">
+            <span class="input-group-text" id="fontSize-label">50</span>
+          </div>
+        </div>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="brightness-input"><i class="fa fa-sun-o" aria-hidden="true"></i></label>
+          </div>
+          <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="brightness-input">
+          <div class="input-group-append">
+            <span class="input-group-text" id="brightness-label">0</span>
+          </div>
+        </div>
+        
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="contrast-input"><i class="fa fa-adjust" aria-hidden="true"></i></label>
+          </div>
+          <input type="range" min="-100" max="100" class="form-control form-control-sm custom-slider" id="contrast-input">
+          <div class="input-group-append">
+            <span class="input-group-text" id="contrast-label">0</span>
+          </div>
+        </div>
+        
+        <div class="btn-group filter-group" role="group" aria-label="filter group">
+          <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
+          <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
+          <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
+        </div>
+        
+        <div class="btn-group" role="group" aria-label="save/reset group">
+          <button id="reset-btn" class="btn btn-danger" type="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+          <a id="save-btn" class="btn btn-success" href="#" role="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
+        </div>
+
+      </main>
+    </div>
+
+    <div class="container text-center p-3 footer-wrapper">
+      <footer>
+        <a href="https://pictureelement.github.io/portfolio-2/">
+          <i class="fa fa-code" style="font-size:20px;color:#ad5389;" aria-hidden="true"></i> with <i class="fa fa-heart" style="font-size:16px;color:#ad5389;" aria-hidden="true"></i> by PictureElement
+        </a>
+      </footer>
+    </div>
+
     <script>
       /* Register service worker */
       if ('serviceWorker' in navigator) {
