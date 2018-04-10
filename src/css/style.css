@@ -79,6 +79,7 @@ body {
 header {
   max-width: 600px;
   padding: 1rem;
+  overflow: none;
 }
 
 .header-brand {
