@@ -74,12 +74,13 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  overflow: hidden;
 }
 
 header {
   max-width: 600px;
   padding: 1rem;
-  overflow: none;
+  overflow: hidden;
 }
 
 .header-brand {
