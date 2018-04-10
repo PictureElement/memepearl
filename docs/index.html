@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- web fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico%7CRaleway" rel="stylesheet">
     <!-- manifest & webpage icons -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
@@ -42,7 +42,7 @@
         <img width="100" class="logo" draggable="false" src="images/logo.svg" alt="site logo">
         <h1 class="header-brand text-gradient">MemePearl</h1>
         <p class="lead-custom text-white">
-          A simple and easy to use meme generator with photo effects and
+          A simple and easy to use meme generator with photo effects and 
           filters. Upload your image and generate funny memes instantly.
         </p>
         <a href="https://github.com/PictureElement" class="badge badge-light px-3 py-2"><i class="fa fa-github" aria-hidden="true"></i> Follow @PictureElement</a>
@@ -51,7 +51,7 @@
     </div>
     
     <div class="container-fluid text-center main-wrapper">
-      <main>
+      <main class="clearfix">
         
         <div class="canvas-wrapper">
           <canvas id="c" class="border-dark rounded img-thumbnail">
@@ -103,25 +103,23 @@
           </div>
         </div>
         
-        <div class="btn-group" role="group" aria-label="filter group">
+        <div class="btn-group filter-group" role="group" aria-label="filter group">
           <button id="grayscale-btn" class="btn btn-custom" type="button">Grayscale</button>
           <button id="sepia-btn" class="btn btn-custom" type="button">Sepia</button>
           <button id="invert-btn" class="btn btn-custom" type="button">Invert</button>
         </div>
         
-        <div class="btn-group" role="group" aria-label="save/reset group">
+        <div class="btn-group save-reset-group" role="group" aria-label="save/reset group">
           <button id="reset-btn" class="btn btn-danger" type="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
-          <button class="btn btn-custom">
-            <label for="file-input" class="m-0">
-              <i class="fa fa-upload" aria-hidden="true"></i><input type="file" id="file-input" hidden name="image file" accept=".jpg, .jpeg, .png">
-            </label>
-          </button>
+          <label for="file-input" class="m-0 btn btn-primary">
+            <i class="fa fa-upload" aria-hidden="true"></i><input type="file" id="file-input" hidden name="image file" accept=".jpg, .jpeg, .png">
+          </label>
           <a id="save-btn" class="btn btn-success" href="#" role="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
         </div>
 
       </main>
     </div>
-  
+    
     <div class="container-fluid text-center footer-wrapper">
       <footer>
         <a href="https://pictureelement.github.io/portfolio-2/">

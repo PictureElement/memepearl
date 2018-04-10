@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- web fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico%7CRaleway" rel="stylesheet">
     <!-- manifest & webpage icons -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
@@ -111,11 +111,9 @@
         
         <div class="btn-group save-reset-group" role="group" aria-label="save/reset group">
           <button id="reset-btn" class="btn btn-danger" type="button"><i class="fa fa-repeat" aria-hidden="true"></i></button>
-          <button class="btn btn-primary">
-            <label for="file-input" class="m-0">
-              <i class="fa fa-upload" aria-hidden="true"></i><input type="file" id="file-input" hidden name="image file" accept=".jpg, .jpeg, .png">
-            </label>
-          </button>
+          <label for="file-input" class="m-0 btn btn-primary">
+            <i class="fa fa-upload" aria-hidden="true"></i><input type="file" id="file-input" hidden name="image file" accept=".jpg, .jpeg, .png">
+          </label>
           <a id="save-btn" class="btn btn-success" href="#" role="button"><i class="fa fa-floppy-o" aria-hidden="true"></i></a>
         </div>
 
