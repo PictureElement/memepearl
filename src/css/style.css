@@ -159,10 +159,21 @@ main {
  * TEXT INPUT STYLE
  */
 
+input[type="text"] {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+input[type="text"]:hover {
+  opacity: 1;
+}
+
+
 input[type="text"]:focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   border: 1px solid #ad5389;
+  opacity: 1;
 }
 
 /*
@@ -174,6 +185,7 @@ input[type="text"]:focus {
   -moz-appearance: none;
   appearance: none; /* remove platform specific styling */
   width: 100%;
+  cursor: pointer;
   background: #fff;
   outline: none;
   opacity: 0.7;
@@ -191,6 +203,7 @@ input[type="text"]:focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   box-shadow: 0 0 0 0.2rem rgba(180,100,148,.5);
   border: 1px solid #ad5389;
+  opacity: 1;
 }
 
 .custom-slider::-webkit-slider-thumb {
@@ -215,11 +228,6 @@ input[type="text"]:focus {
 /*
  * FOOTER
  */
-
-hr {
-  background: rgb(158, 209, 221);
-  margin: 0;
-}
 
 .footer-wrapper {
   margin: 0;
@@ -271,15 +279,3 @@ footer a:hover {
     margin-top: 0;
   }
 }
-
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
